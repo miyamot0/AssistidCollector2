@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="AssistidCollector2.Tasks.TaskHelp">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <OnPlatform.Platforms>
+                <On Platform="iOS" Value="0, 20, 0, 0" />
+                <On Platform="Android" Value="0, 0, 0, 0" />
+                <On Platform="UWP" Value="0, 0, 0, 0" />
+            </OnPlatform.Platforms>
+        </OnPlatform>
+    </ContentPage.Padding>    
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ScrollView>
+            <StackLayout Padding="5, 5, 5, 5" 
+                     Grid.Row="0">
+                
+                <Label FontSize="Large" 
+                   Margin="0, 0, 0, 10"
+                   HorizontalTextAlignment="Center"
+                   Text="Initial Setup and Activation"></Label>
+                    <Label FontSize="Large" 
+                           Margin="25, 0, 0, 10"
+                           Text="1) The application is the core of the tablet and you cannot access device settings as you normally would."></Label>
+                    <Label FontSize="Large" 
+                           Margin="25, 0, 0, 10"
+                           Text="2) To access settings, such as to enable internet, you should press the 'Settings' button located near the top of the Home screen."></Label>
+                    <Label FontSize="Large" 
+                           Margin="25, 0, 0, 10"
+                           Text="3) To access settings, such as to enable internet, you should press the 'Settings' button located near the top of the Home screen."></Label>
+
+                <Label FontSize="Large" 
+                   Margin="0, 0, 0, 10"
+                   HorizontalTextAlignment="Center"
+                   Text="Using the Sleep Application"></Label>
+                    <Label FontSize="Large" 
+                       Margin="25, 0, 0, 10"
+                       Text="• There are 5 sleep interventions to choose from. Please select the sleep intervention that we discussed to best suit your child's needs."></Label>
+                    <Label FontSize="Large" 
+                       Margin="25, 0, 0, 10"
+                       Text="• Please refer to the strategies provided and select the strategies that you have actually used. It is okay to add or change options as you feel is appropriate for your child. But remember to tick the options you used."></Label>
+                    <Label FontSize="Large" 
+                       Margin="25, 0, 0, 10"
+                       Text="• There are 3 relaxation options please select the one that is appropriate for your child and tick the option you have selected."></Label>
+                    <Label FontSize="Large" 
+                       Margin="25, 0, 0, 10"
+                       Text="• Please ensure that you scroll down to the bottom of each screen to gain access to all the information."></Label>
+                    <Label FontSize="Large" 
+                       Margin="25, 0, 0, 10"
+                       Text="• It is important that each evening you tick the intervention screen and each option that you select from the general hygiene and relaxation screens."></Label>
+
+            </StackLayout>
+        </ScrollView>
+        <Button x:Name="helpButton"
+            Text="Close Help"
+            Grid.Row="1"
+            Clicked="Handle_ClickedAsync"></Button>
+    </Grid>
+</ContentPage>

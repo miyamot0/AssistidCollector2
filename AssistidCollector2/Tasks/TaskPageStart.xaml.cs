@@ -33,6 +33,16 @@ using Xamarin.Forms;
 using AssistidCollector2.Models;
 using AssistidCollector2.Enums;
 using AssistidCollector2.Views;
+using AssistidCollector2.Interfaces;
+using System.Diagnostics;
+using Plugin.Connectivity;
+using System.Threading;
+using Acr.UserDialogs;
+using Dropbox.Api.Files;
+using AssistidCollector2.Storage;
+using AssistidCollector2.Helpers;
+using System.Linq;
+using System.Text;
 
 namespace AssistidCollector2.Tasks
 {
@@ -122,7 +132,7 @@ namespace AssistidCollector2.Tasks
             });
 
             tapGestureRecognizer = new TapGestureRecognizer();
-            tapGestureRecognizer.Tapped += TapGestureRecognizer_Tapped;
+            tapGestureRecognizer.Tapped += TapGestureRecognizer_TappedAsync;
 
             foreach (SocialInclusionTasks item in taskModels)
             {
@@ -139,14 +149,191 @@ namespace AssistidCollector2.Tasks
             }
         }
 
-        void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        async void TapGestureRecognizer_TappedAsync(object sender, EventArgs e)
         {
+            var getCardTapped = sender as CardViewTemplate;
 
+            ContentPage view = null;
+
+            if (getCardTapped != null)
+            {
+                switch (getCardTapped.PageId)
+                {
+                    case Identifiers.Pages.Start:
+                        /* Stubbed out */
+
+                        break;
+
+                    case Identifiers.Pages.CreatedActivity:
+                        //view = new TaskNightAwakening();
+
+                        break;
+
+                    case Identifiers.Pages.DogWalking:
+                        //view = new TaskBedtimeResistance();
+
+                        break;
+
+                    case Identifiers.Pages.EnjoyExercise:
+                        //view = new TaskCosleeping();
+
+                        break;
+
+                    case Identifiers.Pages.FoodShopping:
+                        //view = new TaskMorningAwakening();
+
+                        break;
+
+                    case Identifiers.Pages.GoForWalk:
+                        //view = new TaskSleepOnset();
+
+                        break;
+
+                    case Identifiers.Pages.ListenMusic:
+                        //view = new TaskSleepOnset();
+
+                        break;
+
+                    case Identifiers.Pages.Movies:
+                        //view = new TaskSleepOnset();
+
+                        break;
+
+                    case Identifiers.Pages.SportGames:
+                        //view = new TaskSleepOnset();
+
+                        break;
+                }
+
+                // TODO: hack fix
+                if (view == null)
+                {
+                    return;
+                }
+
+                App.RefreshServer = false;
+
+                view.Disappearing += (sender2, e2) =>
+                {
+                    if (App.RefreshServer)
+                    {
+                        Handle_Clicked(sender2, e2);
+                    }
+
+                    App.RefreshServer = false;
+                };
+
+                await Navigation.PushAsync(view, true);
+            }
         }
 
-        void Handle_Clicked(object sender, System.EventArgs e)
+        async void Handle_Clicked(object sender, System.EventArgs e)
         {
-            throw new NotImplementedException();
+            await Navigation.PushModalAsync(new TaskHelp());
+        }
+
+        void Handle_Settings_Clicked(object sender, System.EventArgs e)
+        {
+            DependencyService.Get<InterfaceAdministrator>().AccessSettings();
+        }
+
+        async void Handle_Sync_ClickedAsync(object sender, System.EventArgs e)
+        {
+            Debug.WriteLineIf(App.Debugging, "Update_Clicked()");
+
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                return;
+            }
+
+            //int count = 0;
+
+            CancellationTokenSource cancelSrc = new CancellationTokenSource();
+            ProgressDialogConfig config = new ProgressDialogConfig()
+                .SetTitle("Syncing with server")
+                .SetIsDeterministic(false)
+                .SetMaskType(MaskType.Black)
+                .SetCancel(onCancel: cancelSrc.Cancel);
+
+            using (IProgressDialog progress = UserDialogs.Instance.Progress(config))
+            {
+                try
+                {
+                    ListFolderResult serverFiles = await DropboxServer.CountIndividualFiles();
+                    List<StorageModel> currentData = await App.Database.GetDataAsync();
+
+                    if (serverFiles == null || currentData == null || cancelSrc.IsCancellationRequested)
+                    {
+                        // Nothing.. just move on
+                    }
+                    else if (currentData.Count == serverFiles.Entries.Count)
+                    {
+                        // Same.. no worries
+                    }
+                    else if (currentData.Count > serverFiles.Entries.Count)
+                    {
+                        List<int> localIds = currentData.Select(l => l.ID).ToList();
+
+                        List<string> remoteIdsStr = serverFiles.Entries.Select(r => r.Name).ToList();
+                        remoteIdsStr = remoteIdsStr.Select(r => r.Split('_')[1]).ToList();
+                        remoteIdsStr = remoteIdsStr.Select(r => r.Split('.')[0]).ToList();
+
+                        List<int> remoteIds = remoteIdsStr.Select(r => int.Parse(r)).ToList();
+
+                        var missing = localIds.Except(remoteIds);
+
+                        for (int count = 0; count < missing.Count() && !cancelSrc.IsCancellationRequested; count++)
+                        {
+                            if (cancelSrc.IsCancellationRequested)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                await Task.Delay(App.DropboxDeltaTimeout);
+                            }
+
+                            progress.Title = "Uploading File " + (count + 1) + " of " + missing.Count().ToString();
+
+                            var mStorageModel = currentData.Single(m => m.ID == missing.ElementAt(count));
+
+                            await DropboxServer.UploadFile(new System.IO.MemoryStream(Encoding.UTF8.GetBytes(mStorageModel.CSV)), mStorageModel.ID);
+                        }
+
+                        /*
+                        foreach (int index in missing)
+                        {
+                            if (cancelSrc.IsCancellationRequested)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                await Task.Delay(App.DropboxDeltaTimeout);
+                            }
+                            progress.Title = "Uploading File " + (count + 1) + " of " + missing.Count().ToString();
+                            var mStorageModel = currentData.Single(m => m.ID == index);
+                            await DropboxServer.UploadFile(new System.IO.MemoryStream(Encoding.UTF8.GetBytes(mStorageModel.CSV)), mStorageModel.ID);
+                            count++;
+                        }
+                        */
+                    }
+                }
+                catch (Exception exc)
+                {
+                    Debug.WriteLineIf(App.Debugging, exc.ToString());
+                }
+            }
+        }
+
+        /// <summary>
+        /// Base methods
+        /// </summary>
+        /// <returns></returns>
+        protected override bool OnBackButtonPressed()
+        {
+            base.OnBackButtonPressed();
+            return true;
         }
     }
 }

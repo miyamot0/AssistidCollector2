@@ -3,12 +3,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:local="clr-namespace:AssistidCollector2"
     x:Class="AssistidCollector2.Tasks.TaskPageStart">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <OnPlatform.Platforms>
+                <On Platform="iOS" Value="0, 20, 0, 0" />
+                <On Platform="Android" Value="0, 0, 0, 0" />
+                <On Platform="UWP" Value="0, 0, 0, 0" />
+            </OnPlatform.Platforms>
+        </OnPlatform>
+    </ContentPage.Padding>        
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Messaging" />        
-        <ToolbarItem x:Name="settingsItem" 
-                     Text="Settings" />
-        <ToolbarItem Text="Sync" />
+        <ToolbarItem x:Name="settingsItem" Text="Settings" Clicked="Handle_Settings_Clicked" />
+        <ToolbarItem Text="Sync" Clicked="Handle_Sync_ClickedAsync" />
     </ContentPage.ToolbarItems>
 
     <Grid>
