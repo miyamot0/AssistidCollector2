@@ -32,10 +32,11 @@ namespace AssistidCollector2.Models
 {
     public class SocialInclusionTasks
     {
-        public Identifiers.Pages PageId;
+        public int PageId;
 
         public string PageTitle;
         public string PageDescription;
+
         public string PageButton;
 
         public string PageImage;

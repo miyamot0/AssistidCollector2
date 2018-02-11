@@ -38,6 +38,14 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Tasks\TaskCustomize.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tasks\TaskCreator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -67,6 +75,16 @@
     <Compile Include="Tasks\TaskHelp.xaml.cs">
       <DependentUpon>TaskHelp.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tasks\TaskCustomize.xaml.cs">
+      <DependentUpon>TaskCustomize.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ViewTools.cs" />
+    <Compile Include="Models\SocialInclusionStep.cs" />
+    <Compile Include="Views\CardViewStepTemplate.cs" />
+    <Compile Include="Tasks\TaskCreator.xaml.cs">
+      <DependentUpon>TaskCreator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Storage\SocialStepModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -116,6 +134,12 @@
     </Reference>
     <Reference Include="Plugin.Connectivity">
       <HintPath>..\packages\Xam.Plugin.Connectivity.3.1.1\lib\netstandard1.0\Plugin.Connectivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Media.Abstractions">
+      <HintPath>..\packages\Xam.Plugin.Media.3.1.3.222-beta\lib\netstandard1.0\Plugin.Media.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Media">
+      <HintPath>..\packages\Xam.Plugin.Media.3.1.3.222-beta\lib\netstandard1.0\Plugin.Media.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

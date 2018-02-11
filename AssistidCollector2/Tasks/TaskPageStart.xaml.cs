@@ -43,6 +43,7 @@ using AssistidCollector2.Storage;
 using AssistidCollector2.Helpers;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AssistidCollector2.Tasks
 {
@@ -60,7 +61,7 @@ namespace AssistidCollector2.Tasks
 
             taskModels.Add(new SocialInclusionTasks()
             {
-                PageId = Identifiers.Pages.Movies,
+                PageId = Identifiers.Movies,
                 PageTitle = "Getting together for the movies",
                 PageDescription = "This lesson focuses on learning how to interact in the community at the movies.",
                 PageButton = "Select this option to practice at the movies.",
@@ -69,7 +70,7 @@ namespace AssistidCollector2.Tasks
 
             taskModels.Add(new SocialInclusionTasks()
             {
-                PageId = Identifiers.Pages.SportGames,
+                PageId = Identifiers.SportGames,
                 PageTitle = "Learn a sport or a game",
                 PageDescription = "This program is dedicated to learning how to play a sport or a game with others.",
                 PageButton = "Select this option to practice playing games.",
@@ -78,7 +79,7 @@ namespace AssistidCollector2.Tasks
 
             taskModels.Add(new SocialInclusionTasks()
             {
-                PageId = Identifiers.Pages.FoodShopping,
+                PageId = Identifiers.FoodShopping,
                 PageTitle = "Go shopping for food",
                 PageDescription = "The steps in this section focus on the skills needed to go shopping in the community.",
                 PageButton = "Select this option to practice shopping.",
@@ -87,7 +88,7 @@ namespace AssistidCollector2.Tasks
 
             taskModels.Add(new SocialInclusionTasks()
             {
-                PageId = Identifiers.Pages.DogWalking,
+                PageId = Identifiers.DogWalking,
                 PageTitle = "Take a dog for a walk",
                 PageDescription = "These activities focus on take a dog for a walk while out in the community",
                 PageButton = "Select this option to practice walking a dog.",
@@ -96,7 +97,7 @@ namespace AssistidCollector2.Tasks
 
             taskModels.Add(new SocialInclusionTasks()
             {
-                PageId = Identifiers.Pages.ListenMusic,
+                PageId = Identifiers.ListenMusic,
                 PageTitle = "Play or listen to music",
                 PageDescription = "This program is dedicated to playing or listening to music with others.",
                 PageButton = "Select this option to listen to music.",
@@ -105,7 +106,7 @@ namespace AssistidCollector2.Tasks
 
             taskModels.Add(new SocialInclusionTasks()
             {
-                PageId = Identifiers.Pages.EnjoyExercise,
+                PageId = Identifiers.EnjoyExercise,
                 PageTitle = "Enjoy some exercise",
                 PageDescription = "This routine focuses on exercising with other in the community.",
                 PageButton = "Select this option to practice exercising.",
@@ -114,7 +115,7 @@ namespace AssistidCollector2.Tasks
 
             taskModels.Add(new SocialInclusionTasks()
             {
-                PageId = Identifiers.Pages.GoForWalk,
+                PageId = Identifiers.GoForWalk,
                 PageTitle = "Take a walk in the park",
                 PageDescription = "These activities are dedicated to taking a trip in the park.",
                 PageButton = "Select this option to take a walk.",
@@ -124,7 +125,7 @@ namespace AssistidCollector2.Tasks
 
             taskModels.Add(new SocialInclusionTasks()
             {
-                PageId = Identifiers.Pages.CreatedActivity,
+                PageId = Identifiers.CreatedActivity,
                 PageTitle = "Create your own activity",
                 PageDescription = "This activity is one of your own choosing.",
                 PageButton = "Select this option to practice your activity.",
@@ -159,47 +160,47 @@ namespace AssistidCollector2.Tasks
             {
                 switch (getCardTapped.PageId)
                 {
-                    case Identifiers.Pages.Start:
+                    case Identifiers.Start:
                         /* Stubbed out */
 
                         break;
 
-                    case Identifiers.Pages.CreatedActivity:
-                        //view = new TaskNightAwakening();
+                    case Identifiers.CreatedActivity:
+                        view = new TaskCustomize();
 
                         break;
 
-                    case Identifiers.Pages.DogWalking:
+                    case Identifiers.DogWalking:
                         //view = new TaskBedtimeResistance();
 
                         break;
 
-                    case Identifiers.Pages.EnjoyExercise:
+                    case Identifiers.EnjoyExercise:
                         //view = new TaskCosleeping();
 
                         break;
 
-                    case Identifiers.Pages.FoodShopping:
+                    case Identifiers.FoodShopping:
                         //view = new TaskMorningAwakening();
 
                         break;
 
-                    case Identifiers.Pages.GoForWalk:
+                    case Identifiers.GoForWalk:
                         //view = new TaskSleepOnset();
 
                         break;
 
-                    case Identifiers.Pages.ListenMusic:
+                    case Identifiers.ListenMusic:
                         //view = new TaskSleepOnset();
 
                         break;
 
-                    case Identifiers.Pages.Movies:
+                    case Identifiers.Movies:
                         //view = new TaskSleepOnset();
 
                         break;
 
-                    case Identifiers.Pages.SportGames:
+                    case Identifiers.SportGames:
                         //view = new TaskSleepOnset();
 
                         break;

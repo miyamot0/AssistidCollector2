@@ -39,6 +39,7 @@ namespace AssistidCollector2.Storage
     public class ApplicationDatabase
     {
         readonly SQLiteAsyncConnection database;
+        private static object collisionLock = new object();
 
         /// <summary>
         /// Constructor
@@ -47,7 +48,7 @@ namespace AssistidCollector2.Storage
         public ApplicationDatabase(string dbPath)
         {
             database = new SQLiteAsyncConnection(dbPath);
-            //database.CreateTableAsync<ManifestModel>().Wait();
+            database.CreateTableAsync<SocialStepModel>().Wait();
             database.CreateTableAsync<StorageModel>().Wait();
         }
 
@@ -78,12 +79,70 @@ namespace AssistidCollector2.Storage
             }
         }
 
+        public Task<List<SocialStepModel>> GetStepsAsync()
+        {
+            return database.Table<SocialStepModel>().ToListAsync();
+        }
+
+        /// <summary>
+        /// Gets the steps.
+        /// </summary>
+        /// <returns>The steps.</returns>
+        /// <param name="taskType">Task type.</param>
+        public Task<List<SocialStepModel>> GetSteps(int taskType)
+        {
+            lock (collisionLock)
+            {
+
+                return database.QueryAsync<SocialStepModel>("select * from SocialStepModel where TaskType = ?", taskType);
+                //return database.Query<SocialStepModel>("select 'Price' as 'Money', 'Time' as 'Date' from Valuation where StockId = ?", stock.Id);
+
+                /*
+                var query = from steps in database.Table<SocialStepModel>()
+                            where steps.PageType == taskType
+                            select steps;
+
+                return query.ToListAsync();
+                */
+            }
+        }
+
+        /// <summary>
+        /// Gets the largest step IDA sync.
+        /// </summary>
+        /// <returns>The largest step IDA sync.</returns>
+        /// <param name="taskType">Task type.</param>
+        public async Task<int> GetLargestStepIDAsync(int taskType)
+        {
+            try
+            {
+                var result = await database.Table<SocialStepModel>().ToListAsync();
+                var id = result.Aggregate((i1, i2) => i1.ID > i2.ID ? i1 : i2).ID;
+
+                return id;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
         /// <summary>
         /// Save item
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
         public Task<int> SaveItemAsync(StorageModel item)
+        {
+            return database.InsertAsync(item);
+        }
+
+        /// <summary>
+        /// Saves the item async.
+        /// </summary>
+        /// <returns>The item async.</returns>
+        /// <param name="item">Item.</param>
+        public Task<int> SaveItemAsync(SocialStepModel item)
         {
             return database.InsertAsync(item);
         }

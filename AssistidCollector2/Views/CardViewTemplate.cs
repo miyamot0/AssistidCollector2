@@ -62,7 +62,7 @@ namespace AssistidCollector2.Views
     public class CardViewTemplate : ContentView
     {
         private int imgDimension = 250;
-        public Identifiers.Pages PageId;
+        public int PageId;
 
         public CardViewTemplate(SocialInclusionTasks sleepTask)
         {

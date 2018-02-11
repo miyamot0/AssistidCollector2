@@ -7,6 +7,7 @@ using AssistidCollector2.Storage;
 using AssistidCollector2.Tasks;
 using Dropbox.Api;
 using Xamarin.Forms;
+using AssistidCollector2.Models;
 
 namespace AssistidCollector2
 {
@@ -82,6 +83,8 @@ namespace AssistidCollector2
 
         public static event EventHandler DropboxClientChanged;
 
+        public static SocialInclusionStep temporaryStep;
+
         private static Random random = new Random();
         public static string RandomString(int length)
         {
@@ -92,6 +95,7 @@ namespace AssistidCollector2
 
         public static bool Debugging = true;
         public static bool UpdatingAttempts = false;
+        public static bool isTakingPictures = false;
 
         public static int DropboxDeltaTimeout = 2000;
 

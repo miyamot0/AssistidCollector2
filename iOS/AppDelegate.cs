@@ -18,5 +18,16 @@ namespace AssistidCollector2.iOS
 
             return base.FinishedLaunching(app, options);
         }
+    
+        /// <summary>
+        /// Gets the supported interface orientations.
+        /// </summary>
+        /// <returns>The supported interface orientations.</returns>
+        /// <param name="application">Application.</param>
+        /// <param name="forWindow">For window.</param>
+        public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, UIWindow forWindow)
+        {
+            return UIInterfaceOrientationMask.Portrait;
+        }
     }
 }

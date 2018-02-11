@@ -1,5 +1,5 @@
 ﻿//----------------------------------------------------------------------------------------------
-// <copyright file="Identifiers.cs" 
+// <copyright file="SocialInclusionStep.cs" 
 // Copyright February 2, 2018 Shawn Gilroy
 //
 // This file is part of AssistidCollector2
@@ -26,19 +26,22 @@
 //----------------------------------------------------------------------------------------------
 
 using System;
+using AssistidCollector2.Enums;
 
-namespace AssistidCollector2.Enums
+namespace AssistidCollector2.Models
 {
-    public static class Identifiers
+    public class SocialInclusionStep
     {
-        public const int Start = 0;
-        public const int Movies = 1;
-        public const int SportGames = 2;
-        public const int FoodShopping = 3;
-        public const int DogWalking = 4;
-        public const int ListenMusic = 5;
-        public const int EnjoyExercise = 6;
-        public const int GoForWalk = 7;
-        public const int CreatedActivity = 8;
+        public int YIndex;
+
+        public string Title;
+        public string Description;
+        public string ImgBytes;
+
+        public int PageType;
+
+        public int ID;
+
+        public SocialInclusionStep() { }
     }
 }

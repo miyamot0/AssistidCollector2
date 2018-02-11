@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="AssistidCollector2.Tasks.TaskCreator">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <OnPlatform.Platforms>
+                <On Platform="iOS" Value="5, 20, 5, 5" />
+                <On Platform="Android" Value="5, 5, 0, 5" />
+                <On Platform="UWP" Value="5, 0, 5, 5" />
+            </OnPlatform.Platforms>
+        </OnPlatform>
+    </ContentPage.Padding>
+    
+    <Grid>
+        <Grid.RowDefinitions>            
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Entry x:Name="stepTitle"
+            Grid.Row="0"
+            Placeholder="Enter name of step here"></Entry>
+
+        <Entry x:Name="stepDescription"
+            Grid.Row="1"
+            Placeholder="Enter the prompt you want spoken aloud when activated"></Entry>
+
+        <Button x:Name="stepPhotoButton"
+            Text="Take Photo"
+            BackgroundColor="Blue"
+            TextColor="White"
+            Grid.Row="2"
+            Clicked="Take_PhotoAsync"></Button>
+                    
+        <Image x:Name="stepPhoto"
+            Aspect="AspectFit" 
+            Grid.Row="3"/>
+
+        <Button x:Name="stepButton"
+            Text="Save New Step"
+            BackgroundColor="Green"
+            TextColor="White"
+            Grid.Row="4"
+            Clicked="Save_StepAsync"></Button>
+        
+    </Grid>
+    
+</ContentPage>
