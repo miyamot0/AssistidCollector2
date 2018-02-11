@@ -17,7 +17,7 @@ namespace AssistidCollector2.Views
 
         public bool WasActivated = false;
 
-        string itemDescription;
+        public string itemDescription;
 
         CardStatusView statusView;
 

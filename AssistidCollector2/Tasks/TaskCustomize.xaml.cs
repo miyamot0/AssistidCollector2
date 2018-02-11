@@ -13,6 +13,8 @@ using AssistidCollector2.Storage;
 using System.Linq;
 using Xamarin.Forms.Internals;
 using AssistidCollector2.Helpers;
+using Plugin.Connectivity;
+using System.Text;
 
 namespace AssistidCollector2.Tasks
 {
@@ -58,16 +60,13 @@ namespace AssistidCollector2.Tasks
         {
             if ((sender as Button) != null) { (sender as Button).IsEnabled = false; }
 
-            /*
-
-            string returnString = ViewTools.CommaSeparatedValue("Data,Value", "Intervention,Sleep Onset",
-                sleepOnsetStackContent, taskModels,
-                startTime, DateTime.Now.Subtract(startTime));
+            string returnString = ViewTools.CommaSeparatedValue("Data,Value", "InterventionCode," + PageType.ToString(),
+                                                                customPageStackContent, startTime, DateTime.Now.Subtract(startTime));
 
             int result = await App.Database.SaveItemAsync(new StorageModel()
             {
                 CSV = returnString,
-                Intervention = "Sleep Onset"
+                Intervention = PageType.ToString()
             });
 
             if (CrossConnectivity.Current.IsConnected)
@@ -88,10 +87,6 @@ namespace AssistidCollector2.Tasks
             }
 
             App.RefreshServer = true;
-
-            
-
-            */
 
             await Navigation.PopAsync();
         }
