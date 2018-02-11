@@ -5,6 +5,7 @@ using AssistidCollector2.Enums;
 using AssistidCollector2.Models;
 using AssistidCollector1.Views;
 using System.IO;
+using System.Diagnostics;
 
 namespace AssistidCollector2.Views
 {
@@ -13,9 +14,13 @@ namespace AssistidCollector2.Views
         public int PageId;
         public int imgDimension = 250;
 
+        string itemDescription;
+
         public CardViewStepTemplate(SocialInclusionStep socialTask)
         {
             PageId = socialTask.PageType;
+
+            itemDescription = socialTask.Description;
 
             Grid grid = new Grid
             {
@@ -26,7 +31,6 @@ namespace AssistidCollector2.Views
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 RowDefinitions = {
                     new RowDefinition { Height = new GridLength (imgDimension, GridUnitType.Auto) },
-                    //new RowDefinition { Height = new GridLength (2, GridUnitType.Absolute) }
                 },
                 ColumnDefinitions = {
                     new ColumnDefinition { Width = new GridLength (5, GridUnitType.Absolute) },
@@ -39,17 +43,29 @@ namespace AssistidCollector2.Views
             grid.Children.Add(new Image()
             {
                 Source = Xamarin.Forms.ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(socialTask.ImgBytes))),
-                //Source = socialTask.ImgPath,
                 HeightRequest = imgDimension,
                 WidthRequest = imgDimension,
                 Aspect = Aspect.AspectFill
             }, 1, 2, 0, 1);
             grid.Children.Add(new CardDetailsView(socialTask.Title, socialTask.Description, LayoutOptions.StartAndExpand), 2, 3, 0, 1);
-            //grid.Children.Add(new CardButtonView(""), 1, 3, 1, 2);
 
             Padding = new Thickness(0, 0, 0, 20);
 
             Content = grid;
+
+            TapGestureRecognizer tgr = new TapGestureRecognizer();
+            tgr.Tapped += (s, e) =>
+            {
+
+                Debug.WriteLineIf(App.Debugging, "Description to output: " + itemDescription);
+                //Frame tappedFrame = s as Frame;
+
+                //SelectedRating = int.Parse(tappedFrame.AutomationId);
+
+                //await ColorFramesAsync(RatingOptions[SelectedRating].Color);
+            };
+
+            GestureRecognizers.Add(tgr);
 
         }
     }
