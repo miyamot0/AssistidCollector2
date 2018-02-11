@@ -85,6 +85,7 @@
       <DependentUpon>TaskCreator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Storage\SocialStepModel.cs" />
+    <Compile Include="Interfaces\InterfaceTextToSpeech.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

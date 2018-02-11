@@ -161,7 +161,7 @@ namespace AssistidCollector2.Helpers
                 }
                 catch (Exception e)
                 {
-                    //Debug.WriteLineIf(App.Debugging, "Exceptoin: " + e.ToString());
+                    Debug.WriteLineIf(App.Debugging, "Exceptoin: " + e.ToString());
                 }
             }            
         }

@@ -88,8 +88,8 @@ namespace AssistidCollector2.Tasks
                         }
                         else
                         {
-                            Debug.WriteLineIf(App.Debugging, "Album: " + file.AlbumPath);
-                            Debug.WriteLineIf(App.Debugging, "Local: " + file.Path);
+                            //Debug.WriteLineIf(App.Debugging, "Album: " + file.AlbumPath);
+                            //Debug.WriteLineIf(App.Debugging, "Local: " + file.Path);
 
                             var imageStream = file.GetStream();
                             byte[] filebytearray = new byte[imageStream.Length];
@@ -129,9 +129,9 @@ namespace AssistidCollector2.Tasks
             StepTitle = stepTitle.Text;
             StepDescription = stepDescription.Text;
 
-            Debug.WriteLineIf(App.Debugging, "Save_StepAsync: isTakingPics >>> " + App.isTakingPictures);
-            Debug.WriteLineIf(App.Debugging, "Save_StepAsync: StepTitle >>> " + StepTitle);
-            Debug.WriteLineIf(App.Debugging, "Save_StepAsync: StepDescription >>> " + StepDescription);
+            //Debug.WriteLineIf(App.Debugging, "Save_StepAsync: isTakingPics >>> " + App.isTakingPictures);
+            //Debug.WriteLineIf(App.Debugging, "Save_StepAsync: StepTitle >>> " + StepTitle);
+            //Debug.WriteLineIf(App.Debugging, "Save_StepAsync: StepDescription >>> " + StepDescription);
 
             if (StepTitle == "" || StepDescription == "" || StepImgBytes == "")
             {

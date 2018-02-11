@@ -6,6 +6,7 @@ using AssistidCollector2.Models;
 using AssistidCollector1.Views;
 using System.IO;
 using System.Diagnostics;
+using AssistidCollector2.Interfaces;
 
 namespace AssistidCollector2.Views
 {
@@ -56,17 +57,10 @@ namespace AssistidCollector2.Views
             TapGestureRecognizer tgr = new TapGestureRecognizer();
             tgr.Tapped += (s, e) =>
             {
-
-                Debug.WriteLineIf(App.Debugging, "Description to output: " + itemDescription);
-                //Frame tappedFrame = s as Frame;
-
-                //SelectedRating = int.Parse(tappedFrame.AutomationId);
-
-                //await ColorFramesAsync(RatingOptions[SelectedRating].Color);
+                DependencyService.Get<InterfaceTextToSpeech>().Speak(itemDescription);
             };
 
             GestureRecognizers.Add(tgr);
-
         }
     }
 }

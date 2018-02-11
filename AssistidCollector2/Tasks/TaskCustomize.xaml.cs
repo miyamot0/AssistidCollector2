@@ -19,7 +19,6 @@ namespace AssistidCollector2.Tasks
     public partial class TaskCustomize : ContentPage
     {
         List<SocialInclusionStep> taskModels;
-        CardViewStepTemplate cardCheckTemplate;
         DateTime startTime;
 
         private int PageType = Identifiers.CreatedActivity;
