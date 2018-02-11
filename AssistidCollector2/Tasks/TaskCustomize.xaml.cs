@@ -12,6 +12,7 @@ using Acr.UserDialogs;
 using AssistidCollector2.Storage;
 using System.Linq;
 using Xamarin.Forms.Internals;
+using AssistidCollector2.Helpers;
 
 namespace AssistidCollector2.Tasks
 {
@@ -37,14 +38,14 @@ namespace AssistidCollector2.Tasks
             NavigationPage.SetHasBackButton(this, true);
             NavigationPage.SetBackButtonTitle(this, "Back");
 
-            PollForDataAsync(PageType);
+            PollForDataAsync();
         }
 
         /// <summary>
         /// Polls for data async.
         /// </summary>
         /// <param name="pageType">Page type.</param>
-        async void PollForDataAsync(int pageType)
+        async void PollForDataAsync()
         {
             try
             {
@@ -53,7 +54,7 @@ namespace AssistidCollector2.Tasks
 
                 if (mStoredSteps != null)
                 {
-                    var mSpecificSteps = mStoredSteps.Where(model => model.TaskType == pageType).ToList();
+                    var mSpecificSteps = mStoredSteps.Where(model => model.TaskType == PageType).ToList();
 
                     if (mSpecificSteps == null)
                     {
@@ -209,51 +210,15 @@ namespace AssistidCollector2.Tasks
             }
         }
 
-        async
 
         /// <summary>
         /// Handles the edit steps clicked.
         /// </summary>
         /// <param name="sender">Sender.</param>
         /// <param name="e">E.</param>
-        void Handle_Edit_Steps_ClickedAsync(object sender, System.EventArgs e)
+        void Handle_Edit_Steps_Clicked(object sender, System.EventArgs e)
         {
-            string[] stepsInList = taskModels.Select(m => m.Title).ToArray();
-
-            if (stepsInList == null || stepsInList.Length == 0)
-            {
-                return;
-            }
-
-            string destroyString = "OK";
-
-            CancellationTokenSource cancelSrc = new CancellationTokenSource();
-
-            string result = await UserDialogs.Instance.ActionSheetAsync("Pick Item to Edit", "Close", destroyString, cancelSrc.Token, stepsInList);
-
-            Debug.WriteLineIf(App.Debugging, result);
-
-            if (result != destroyString)
-            {
-                bool promptDelete = await UserDialogs.Instance.ConfirmAsync("Delete step?", "Confirm", destroyString, "Cancel", cancelSrc.Token);
-
-                int indexWithinList = stepsInList.IndexOf(result);
-
-                Debug.WriteLineIf(App.Debugging, "indexWithinList: " + indexWithinList.ToString());
-
-                if (indexWithinList != -1)
-                {
-                    var item = taskModels.Where(m => m.ID == taskModels.ElementAt(indexWithinList).ID).First();
-
-                    taskModels.Clear();
-
-                    customPageStackContent.Children.Clear();
-
-                    await App.Database.DeleteStepAsync(item.ID);
-
-                    PollForDataAsync(PageType);
-                }
-            }
+            ViewTools.HandleStepRemovalAsync(taskModels, customPageStackContent, PollForDataAsync);
         }
     }
 }

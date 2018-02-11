@@ -28,7 +28,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading;
+using Acr.UserDialogs;
+using AssistidCollector2.Models;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace AssistidCollector2.Helpers
 {
@@ -71,5 +77,45 @@ namespace AssistidCollector2.Helpers
             return returnString;
         }
         */
+
+        public static async void HandleStepRemovalAsync(List<SocialInclusionStep> taskModels, StackLayout customPageStackContent, Action pollForDataAsync)
+        {
+            string[] stepsInList = taskModels.Select(m => m.Title).ToArray();
+
+            if (stepsInList == null || stepsInList.Length == 0)
+            {
+                return;
+            }
+
+            string destroyString = "OK";
+
+            CancellationTokenSource cancelSrc = new CancellationTokenSource();
+
+            string result = await UserDialogs.Instance.ActionSheetAsync("Pick Item to Edit", "Close", destroyString, cancelSrc.Token, stepsInList);
+
+            //Debug.WriteLineIf(App.Debugging, result);
+
+            if (result != destroyString)
+            {
+                bool promptDelete = await UserDialogs.Instance.ConfirmAsync("Delete step?", "Confirm", destroyString, "Cancel", cancelSrc.Token);
+
+                int indexWithinList = stepsInList.IndexOf(result);
+
+                //Debug.WriteLineIf(App.Debugging, "indexWithinList: " + indexWithinList.ToString());
+
+                if (indexWithinList != -1)
+                {
+                    var item = taskModels.Where(m => m.ID == taskModels.ElementAt(indexWithinList).ID).First();
+
+                    taskModels.Clear();
+
+                    customPageStackContent.Children.Clear();
+
+                    await App.Database.DeleteStepAsync(item.ID);
+
+                    pollForDataAsync();
+                }
+            }
+        }
     }
 }
