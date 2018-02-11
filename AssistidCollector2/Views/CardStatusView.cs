@@ -61,14 +61,18 @@ namespace AssistidCollector2.Views
     /// </summary>
     public class CardStatusView : ContentView
     {
+        BoxView boxView;
+
         public CardStatusView()
         {
-            Content = new BoxView
+            boxView = new BoxView
             {
                 VerticalOptions = LayoutOptions.Fill,
                 HorizontalOptions = LayoutOptions.Fill,
                 BackgroundColor = GetStatusColor()
             };
+
+            Content = boxView;
         }
 
         /// <summary>
@@ -104,6 +108,16 @@ namespace AssistidCollector2.Views
             mColor = Color.FromHex("C5C5C5");
 
             return mColor;
+        }
+
+        /// <summary>
+        /// Sets the color.
+        /// </summary>
+        /// <param name="newColor">New color.</param>
+        public void SetColor(Color newColor)
+        {
+            boxView.Color = newColor;
+            boxView.BackgroundColor = newColor;
         }
     }
 }

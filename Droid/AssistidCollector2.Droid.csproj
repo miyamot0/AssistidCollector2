@@ -196,6 +196,7 @@
     <Compile Include="Implementations\ImplementationContentLocation.cs" />
     <Compile Include="Implementations\ImplementationSaveLoad.cs" />
     <Compile Include="MainApplication.cs" />
+    <Compile Include="Implementations\ImplementationTextToSpeech.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

@@ -15,7 +15,11 @@ namespace AssistidCollector2.Views
         public int PageId;
         public int imgDimension = 250;
 
+        public bool WasActivated = false;
+
         string itemDescription;
+
+        CardStatusView statusView;
 
         public CardViewStepTemplate(SocialInclusionStep socialTask)
         {
@@ -34,13 +38,15 @@ namespace AssistidCollector2.Views
                     new RowDefinition { Height = new GridLength (imgDimension, GridUnitType.Auto) },
                 },
                 ColumnDefinitions = {
-                    new ColumnDefinition { Width = new GridLength (5, GridUnitType.Absolute) },
+                    new ColumnDefinition { Width = new GridLength (10, GridUnitType.Absolute) },
                     new ColumnDefinition { Width = new GridLength (imgDimension, GridUnitType.Absolute) },
                     new ColumnDefinition { Width = new GridLength (1, GridUnitType.Star) }
                 }
             };
 
-            grid.Children.Add(new CardStatusView(), 0, 1, 0, 1);
+            statusView = new CardStatusView();
+
+            grid.Children.Add(statusView, 0, 1, 0, 1);
             grid.Children.Add(new Image()
             {
                 Source = Xamarin.Forms.ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(socialTask.ImgBytes))),
@@ -58,6 +64,10 @@ namespace AssistidCollector2.Views
             tgr.Tapped += (s, e) =>
             {
                 DependencyService.Get<InterfaceTextToSpeech>().Speak(itemDescription);
+
+                statusView.SetColor(Color.Green);
+
+                WasActivated = true;
             };
 
             GestureRecognizers.Add(tgr);

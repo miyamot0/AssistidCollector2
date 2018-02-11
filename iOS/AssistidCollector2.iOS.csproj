@@ -188,6 +188,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Implementations\ImplementationSaveLoad.cs" />
+    <Compile Include="Implementations\ImplementationTextToSpeech.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\placeholder.png" />
