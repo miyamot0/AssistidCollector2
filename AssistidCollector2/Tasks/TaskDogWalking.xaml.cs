@@ -24,7 +24,7 @@ namespace AssistidCollector2.Tasks
         {
             InitializeComponent();
 
-            Title = "Trip to the Movies";
+            Title = Identifiers.GetDescription(PageType);
 
             startTime = DateTime.Now;
 

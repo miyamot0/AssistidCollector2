@@ -40,5 +40,46 @@ namespace AssistidCollector2.Enums
         public const int EnjoyExercise = 6;
         public const int GoForWalk = 7;
         public const int CreatedActivity = 8;
+
+        /// <summary>
+        /// Gets the description.
+        /// </summary>
+        /// <returns>The description.</returns>
+        /// <param name="id">Identifier.</param>
+        public static string GetDescription(int id)
+        {
+            switch(id)
+            {
+                case 0:
+                    return "Social Inclusion App";
+
+                case 1:
+                    return "Take a trip to the movies";
+
+                case 2:
+                    return "Play a game or a sport";
+
+                case 3:
+                    return "Go shopping for food";
+
+                case 4:
+                    return "Take a dog for a walk";
+
+                case 5:
+                    return "Listen to music";
+
+                case 6:
+                    return "Exercise for fun";
+
+                case 7:
+                    return "Take a short walk";
+
+                case 8:
+                    return "Create your own activity";
+
+                default:
+                    return "Error";
+            }
+        }
     }
 }

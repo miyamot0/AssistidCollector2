@@ -24,7 +24,7 @@ namespace AssistidCollector2.Tasks
         {
             InitializeComponent();
 
-            Title = "Enjoy Exercise";
+            Title = Identifiers.GetDescription(PageType);
 
             startTime = DateTime.Now;
 

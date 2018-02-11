@@ -62,7 +62,7 @@ namespace AssistidCollector2.Tasks
             taskModels.Add(new SocialInclusionTasks()
             {
                 PageId = Identifiers.Movies,
-                PageTitle = "Getting together for the movies",
+                PageTitle = Identifiers.GetDescription(Identifiers.Movies),
                 PageDescription = "This lesson focuses on learning how to interact in the community at the movies.",
                 PageButton = "Select this option to practice at the movies.",
                 PageImage = "placeholder.png"
@@ -71,7 +71,7 @@ namespace AssistidCollector2.Tasks
             taskModels.Add(new SocialInclusionTasks()
             {
                 PageId = Identifiers.SportGames,
-                PageTitle = "Learn a sport or a game",
+                PageTitle = Identifiers.GetDescription(Identifiers.SportGames),
                 PageDescription = "This program is dedicated to learning how to play a sport or a game with others.",
                 PageButton = "Select this option to practice playing games.",
                 PageImage = "placeholder.png"
@@ -80,7 +80,7 @@ namespace AssistidCollector2.Tasks
             taskModels.Add(new SocialInclusionTasks()
             {
                 PageId = Identifiers.FoodShopping,
-                PageTitle = "Go shopping for food",
+                PageTitle = Identifiers.GetDescription(Identifiers.FoodShopping),
                 PageDescription = "The steps in this section focus on the skills needed to go shopping in the community.",
                 PageButton = "Select this option to practice shopping.",
                 PageImage = "placeholder.png"
@@ -89,7 +89,7 @@ namespace AssistidCollector2.Tasks
             taskModels.Add(new SocialInclusionTasks()
             {
                 PageId = Identifiers.DogWalking,
-                PageTitle = "Take a dog for a walk",
+                PageTitle = Identifiers.GetDescription(Identifiers.DogWalking),
                 PageDescription = "These activities focus on take a dog for a walk while out in the community",
                 PageButton = "Select this option to practice walking a dog.",
                 PageImage = "placeholder.png"
@@ -98,7 +98,7 @@ namespace AssistidCollector2.Tasks
             taskModels.Add(new SocialInclusionTasks()
             {
                 PageId = Identifiers.ListenMusic,
-                PageTitle = "Play or listen to music",
+                PageTitle = Identifiers.GetDescription(Identifiers.ListenMusic),
                 PageDescription = "This program is dedicated to playing or listening to music with others.",
                 PageButton = "Select this option to listen to music.",
                 PageImage = "placeholder.png"
@@ -107,7 +107,7 @@ namespace AssistidCollector2.Tasks
             taskModels.Add(new SocialInclusionTasks()
             {
                 PageId = Identifiers.EnjoyExercise,
-                PageTitle = "Enjoy some exercise",
+                PageTitle = Identifiers.GetDescription(Identifiers.EnjoyExercise),
                 PageDescription = "This routine focuses on exercising with other in the community.",
                 PageButton = "Select this option to practice exercising.",
                 PageImage = "placeholder.png"
@@ -116,17 +116,16 @@ namespace AssistidCollector2.Tasks
             taskModels.Add(new SocialInclusionTasks()
             {
                 PageId = Identifiers.GoForWalk,
-                PageTitle = "Take a walk in the park",
+                PageTitle = Identifiers.GetDescription(Identifiers.GoForWalk),
                 PageDescription = "These activities are dedicated to taking a trip in the park.",
                 PageButton = "Select this option to take a walk.",
                 PageImage = "placeholder.png"
             });
 
-
             taskModels.Add(new SocialInclusionTasks()
             {
                 PageId = Identifiers.CreatedActivity,
-                PageTitle = "Create your own activity",
+                PageTitle = Identifiers.GetDescription(Identifiers.CreatedActivity),
                 PageDescription = "This activity is one of your own choosing.",
                 PageButton = "Select this option to practice your activity.",
                 PageImage = "placeholder.png"
@@ -213,7 +212,7 @@ namespace AssistidCollector2.Tasks
                 {
                     if (App.RefreshServer)
                     {
-                        Handle_Clicked(sender2, e2);
+                        Handle_Sync_ClickedAsync(sender2, e2);
                     }
 
                     App.RefreshServer = false;
@@ -223,16 +222,31 @@ namespace AssistidCollector2.Tasks
             }
         }
 
+        /// <summary>
+        /// Handles the clicked.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
         async void Handle_Clicked(object sender, System.EventArgs e)
         {
             await Navigation.PushModalAsync(new TaskHelp());
         }
 
+        /// <summary>
+        /// Handles the settings clicked.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
         void Handle_Settings_Clicked(object sender, System.EventArgs e)
         {
             DependencyService.Get<InterfaceAdministrator>().AccessSettings();
         }
 
+        /// <summary>
+        /// Handles the sync clicked async.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
         async void Handle_Sync_ClickedAsync(object sender, System.EventArgs e)
         {
             Debug.WriteLineIf(App.Debugging, "Update_Clicked()");
@@ -241,8 +255,6 @@ namespace AssistidCollector2.Tasks
             {
                 return;
             }
-
-            //int count = 0;
 
             CancellationTokenSource cancelSrc = new CancellationTokenSource();
             ProgressDialogConfig config = new ProgressDialogConfig()

@@ -29,7 +29,7 @@ namespace AssistidCollector2.Tasks
         {
             InitializeComponent();
 
-            Title = "Personalized Activity List";
+            Title = Identifiers.GetDescription(PageType);
 
             startTime = DateTime.Now;
 

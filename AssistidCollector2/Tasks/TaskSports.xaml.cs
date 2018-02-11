@@ -24,7 +24,7 @@ namespace AssistidCollector2.Tasks
         {
             InitializeComponent();
 
-            Title = "Play a Game or Sport";
+            Title = Identifiers.GetDescription(PageType);
 
             startTime = DateTime.Now;
 

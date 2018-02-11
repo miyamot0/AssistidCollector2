@@ -24,7 +24,7 @@ namespace AssistidCollector2.Tasks
         {
             InitializeComponent();
 
-            Title = "Take a Walk";
+            Title = Identifiers.GetDescription(PageType);
 
             startTime = DateTime.Now;
 

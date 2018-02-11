@@ -24,7 +24,7 @@ namespace AssistidCollector2.Tasks
         {
             InitializeComponent();
 
-            Title = "Listen to Music";
+            Title = Identifiers.GetDescription(PageType);
 
             startTime = DateTime.Now;
 
