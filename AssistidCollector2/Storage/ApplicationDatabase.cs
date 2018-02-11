@@ -146,5 +146,12 @@ namespace AssistidCollector2.Storage
         {
             return database.InsertAsync(item);
         }
+
+        public Task<int> DeleteStepAsync(int ID)
+        {
+            SocialStepModel item = GetStepsAsync().Result.Where(m => m.ID == ID).First();
+
+            return database.DeleteAsync(item);
+        }
     }
 }

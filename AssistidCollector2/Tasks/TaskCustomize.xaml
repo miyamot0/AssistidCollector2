@@ -14,7 +14,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="addStep" Text="Add" Clicked="Handle_Add_Steps_ClickedAsync" />
-        <ToolbarItem x:Name="editSteps" Text="Edit" Clicked="Handle_Edit_Steps_Clicked" />
+        <ToolbarItem x:Name="editSteps" Text="Edit" Clicked="Handle_Edit_Steps_ClickedAsync" />
     </ContentPage.ToolbarItems>
     
     <Grid>
