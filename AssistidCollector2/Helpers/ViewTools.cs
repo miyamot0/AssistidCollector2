@@ -33,6 +33,8 @@ using System.Linq;
 using System.Threading;
 using Acr.UserDialogs;
 using AssistidCollector2.Models;
+using AssistidCollector2.Storage;
+using AssistidCollector2.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -77,6 +79,92 @@ namespace AssistidCollector2.Helpers
             return returnString;
         }
         */
+
+        public static async void HandlePollDataAsync(List<SocialInclusionStep> taskModels, StackLayout customPageStackContent, int PageType)
+        {
+            try
+            {
+                var mStoredSteps = await App.Database.GetStepsAsync();
+
+                if (mStoredSteps != null)
+                {
+                    var mSpecificSteps = mStoredSteps.Where(model => model.TaskType == PageType).ToList();
+
+                    if (mSpecificSteps == null)
+                    {
+                        return;
+                    }
+
+                    foreach (SocialStepModel model in mStoredSteps)
+                    {
+                        //Debug.WriteLineIf(App.Debugging, "Save_StepAsync: StepTitle >>> " + model.Title);
+                        //Debug.WriteLineIf(App.Debugging, "Save_StepAsync: StepDescription >>> " + model.Description);
+                        //Debug.WriteLineIf(App.Debugging, "Save_StepAsync: StepImgPath >>> " + model.ImgPath);
+
+                        taskModels.Add(new SocialInclusionStep()
+                        {
+                            ID = model.ID,
+                            PageType = model.TaskType,
+                            Title = model.Title,
+                            Description = model.Description,
+                            ImgBytes = model.ImgBytes
+                        });
+                    }
+
+                    foreach (SocialInclusionStep item in taskModels)
+                    {
+                        CardViewStepTemplate cardCheckTemplate = new CardViewStepTemplate(item);
+                        customPageStackContent.Children.Add(cardCheckTemplate);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLineIf(App.Debugging, "Exception: " + e.ToString());
+            }
+        }
+
+        public static async void HandleStepAddedAsync(List<SocialInclusionStep> taskModels, StackLayout customPageStackContent, int PageType)
+        {
+            if (App.temporaryStep.Title == "" ||
+                App.temporaryStep.Description == "" ||
+                App.temporaryStep.ImgBytes == "")
+            {
+                await UserDialogs.Instance.AlertAsync("Error adding new items", "Try again");
+            }
+            else
+            {
+                var task = new SocialInclusionStep()
+                {
+                    PageType = PageType,
+                    Title = App.temporaryStep.Title,
+                    Description = App.temporaryStep.Description,
+                    ImgBytes = App.temporaryStep.ImgBytes
+                };
+
+                taskModels.Add(task);
+
+                CardViewStepTemplate cardCheckTemplate = new CardViewStepTemplate(task);
+                customPageStackContent.Children.Add(cardCheckTemplate);
+
+                try
+                {
+                    var result = await App.Database.SaveItemAsync(new SocialStepModel()
+                    {
+                        TaskType = PageType,
+                        Title = App.temporaryStep.Title,
+                        Description = App.temporaryStep.Description,
+                        ImgBytes = App.temporaryStep.ImgBytes
+                    });
+
+                    //Debug.WriteLineIf(App.Debugging, "Result: " + result.ToString());
+                }
+                catch (Exception e)
+                {
+                    //Debug.WriteLineIf(App.Debugging, "Exceptoin: " + e.ToString());
+                }
+            }            
+        }
 
         public static async void HandleStepRemovalAsync(List<SocialInclusionStep> taskModels, StackLayout customPageStackContent, Action pollForDataAsync)
         {
