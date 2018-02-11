@@ -160,56 +160,51 @@ namespace AssistidCollector2.Tasks
             {
                 switch (getCardTapped.PageId)
                 {
-                    case Identifiers.Start:
-                        /* Stubbed out */
-
-                        break;
-
                     case Identifiers.CreatedActivity:
                         view = new TaskCustomize();
 
                         break;
 
                     case Identifiers.DogWalking:
-                        //view = new TaskBedtimeResistance();
+                        view = new TaskDogWalking();
 
                         break;
 
                     case Identifiers.EnjoyExercise:
-                        //view = new TaskCosleeping();
+                        view = new TaskExercise();
 
                         break;
 
                     case Identifiers.FoodShopping:
-                        //view = new TaskMorningAwakening();
+                        view = new TaskFoodShopping();
 
                         break;
 
                     case Identifiers.GoForWalk:
-                        //view = new TaskSleepOnset();
+                        view = new TaskTakeWalk();
 
                         break;
 
                     case Identifiers.ListenMusic:
-                        //view = new TaskSleepOnset();
+                        view = new TaskMusic();
 
                         break;
 
                     case Identifiers.Movies:
-                        //view = new TaskSleepOnset();
+                        view = new TaskMovies();
 
                         break;
 
                     case Identifiers.SportGames:
-                        //view = new TaskSleepOnset();
+                        view = new TaskSports();
 
                         break;
-                }
 
-                // TODO: hack fix
-                if (view == null)
-                {
-                    return;
+
+                    default:
+                        view = new ContentPage();
+
+                        break;
                 }
 
                 App.RefreshServer = false;

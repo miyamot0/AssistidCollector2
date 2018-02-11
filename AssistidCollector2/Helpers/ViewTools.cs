@@ -72,6 +72,8 @@ namespace AssistidCollector2.Helpers
             {
                 var mStoredSteps = await App.Database.GetStepsAsync();
 
+                //Debug.WriteLineIf(App.Debugging, "Save_StepAsync: PageType >>> " + PageType.ToString());
+
                 if (mStoredSteps != null)
                 {
                     var mSpecificSteps = mStoredSteps.Where(model => model.TaskType == PageType).ToList();
@@ -81,11 +83,11 @@ namespace AssistidCollector2.Helpers
                         return;
                     }
 
-                    foreach (SocialStepModel model in mStoredSteps)
+                    foreach (SocialStepModel model in mSpecificSteps)
                     {
                         //Debug.WriteLineIf(App.Debugging, "Save_StepAsync: StepTitle >>> " + model.Title);
                         //Debug.WriteLineIf(App.Debugging, "Save_StepAsync: StepDescription >>> " + model.Description);
-                        //Debug.WriteLineIf(App.Debugging, "Save_StepAsync: StepImgPath >>> " + model.ImgPath);
+                        //Debug.WriteLineIf(App.Debugging, "Save_StepAsync: StepID >>> " + model.TaskType.ToString());
 
                         taskModels.Add(new SocialInclusionStep()
                         {

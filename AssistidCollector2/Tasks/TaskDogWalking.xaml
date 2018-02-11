@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="AssistidCollector2.Tasks.TaskDogWalking">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <OnPlatform.Platforms>
+                <On Platform="iOS" Value="0, 20, 0, 0" />
+                <On Platform="Android" Value="0, 0, 0, 0" />
+                <On Platform="UWP" Value="0, 0, 0, 0" />
+            </OnPlatform.Platforms>
+        </OnPlatform>
+    </ContentPage.Padding>    
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="addStep" Text="Add" Clicked="Handle_Add_Steps_ClickedAsync" />
+        <ToolbarItem x:Name="editSteps" Text="Edit" Clicked="Handle_Edit_Steps_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ScrollView x:Name="customPageScrollView"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    Margin="5"
+                    Grid.Row="0"
+                    Grid.Column="0">
+            <StackLayout x:Name="customPageStackContent">
+
+            </StackLayout>
+        </ScrollView>
+
+        <Button x:Name="startPageButtonBottom"
+                Text="Save Results"
+                Clicked="Handle_Save_ClickedAsync"
+                HorizontalOptions="FillAndExpand"
+                BackgroundColor="Green"
+                TextColor="White"
+                Margin="5"
+                Grid.Row="1"
+                Grid.Column="0">            
+        </Button>
+    </Grid>
+</ContentPage>

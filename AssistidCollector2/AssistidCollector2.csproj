@@ -46,6 +46,34 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Tasks\TaskMovies.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tasks\TaskSports.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tasks\TaskDogWalking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tasks\TaskFoodShopping.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tasks\TaskMusic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tasks\TaskTakeWalk.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tasks\TaskExercise.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -86,6 +114,27 @@
     </Compile>
     <Compile Include="Storage\SocialStepModel.cs" />
     <Compile Include="Interfaces\InterfaceTextToSpeech.cs" />
+    <Compile Include="Tasks\TaskMovies.xaml.cs">
+      <DependentUpon>TaskMovies.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tasks\TaskSports.xaml.cs">
+      <DependentUpon>TaskSports.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tasks\TaskDogWalking.xaml.cs">
+      <DependentUpon>TaskDogWalking.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tasks\TaskFoodShopping.xaml.cs">
+      <DependentUpon>TaskFoodShopping.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tasks\TaskMusic.xaml.cs">
+      <DependentUpon>TaskMusic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tasks\TaskTakeWalk.xaml.cs">
+      <DependentUpon>TaskTakeWalk.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tasks\TaskExercise.xaml.cs">
+      <DependentUpon>TaskExercise.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
