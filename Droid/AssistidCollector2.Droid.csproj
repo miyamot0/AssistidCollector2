@@ -214,6 +214,15 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
     <AndroidResource Include="Resources\xml\admin.xml" />
     <AndroidResource Include="Resources\drawable\placeholder.png" />
+    <AndroidResource Include="Resources\drawable\Music.png" />
+    <AndroidResource Include="Resources\drawable\Movies.png" />
+    <AndroidResource Include="Resources\drawable\Sports.png" />
+    <AndroidResource Include="Resources\drawable\FoodShopping.png" />
+    <AndroidResource Include="Resources\drawable\WalkDog.png" />
+    <AndroidResource Include="Resources\drawable\WalkPark.png" />
+    <AndroidResource Include="Resources\drawable\Exercise.png" />
+    <AndroidResource Include="Resources\drawable\CreateOwn.png" />
+    <AndroidResource Include="Resources\drawable\CoffeeShop.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Implementations\" />

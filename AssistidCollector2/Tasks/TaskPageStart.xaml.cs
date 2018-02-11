@@ -61,11 +61,11 @@ namespace AssistidCollector2.Tasks
 
             taskModels.Add(new SocialInclusionTasks()
             {
-                PageId = Identifiers.Movies,
-                PageTitle = Identifiers.GetDescription(Identifiers.Movies),
-                PageDescription = "This lesson focuses on learning how to interact in the community at the movies.",
-                PageButton = "Select this option to practice at the movies.",
-                PageImage = "placeholder.png"
+                PageId = Identifiers.FoodShopping,
+                PageTitle = Identifiers.GetDescription(Identifiers.FoodShopping),
+                PageDescription = "The steps in this section focus on the skills needed to go shopping in the community.",
+                PageButton = "Select this option to practice shopping.",
+                PageImage = "FoodShopping.png"
             });
 
             taskModels.Add(new SocialInclusionTasks()
@@ -74,16 +74,7 @@ namespace AssistidCollector2.Tasks
                 PageTitle = Identifiers.GetDescription(Identifiers.SportGames),
                 PageDescription = "This program is dedicated to learning how to play a sport or a game with others.",
                 PageButton = "Select this option to practice playing games.",
-                PageImage = "placeholder.png"
-            });
-
-            taskModels.Add(new SocialInclusionTasks()
-            {
-                PageId = Identifiers.FoodShopping,
-                PageTitle = Identifiers.GetDescription(Identifiers.FoodShopping),
-                PageDescription = "The steps in this section focus on the skills needed to go shopping in the community.",
-                PageButton = "Select this option to practice shopping.",
-                PageImage = "placeholder.png"
+                PageImage = "Sports.png"
             });
 
             taskModels.Add(new SocialInclusionTasks()
@@ -92,7 +83,16 @@ namespace AssistidCollector2.Tasks
                 PageTitle = Identifiers.GetDescription(Identifiers.DogWalking),
                 PageDescription = "These activities focus on take a dog for a walk while out in the community",
                 PageButton = "Select this option to practice walking a dog.",
-                PageImage = "placeholder.png"
+                PageImage = "WalkDog.png"
+            });
+
+            taskModels.Add(new SocialInclusionTasks()
+            {
+                PageId = Identifiers.Movies,
+                PageTitle = Identifiers.GetDescription(Identifiers.Movies),
+                PageDescription = "This lesson focuses on learning how to interact in the community at the movies.",
+                PageButton = "Select this option to practice at the movies.",
+                PageImage = "Movies.png"
             });
 
             taskModels.Add(new SocialInclusionTasks()
@@ -101,7 +101,7 @@ namespace AssistidCollector2.Tasks
                 PageTitle = Identifiers.GetDescription(Identifiers.ListenMusic),
                 PageDescription = "This program is dedicated to playing or listening to music with others.",
                 PageButton = "Select this option to listen to music.",
-                PageImage = "placeholder.png"
+                PageImage = "Music.png"
             });
 
             taskModels.Add(new SocialInclusionTasks()
@@ -110,7 +110,7 @@ namespace AssistidCollector2.Tasks
                 PageTitle = Identifiers.GetDescription(Identifiers.EnjoyExercise),
                 PageDescription = "This routine focuses on exercising with other in the community.",
                 PageButton = "Select this option to practice exercising.",
-                PageImage = "placeholder.png"
+                PageImage = "Exercise.png"
             });
 
             taskModels.Add(new SocialInclusionTasks()
@@ -119,7 +119,16 @@ namespace AssistidCollector2.Tasks
                 PageTitle = Identifiers.GetDescription(Identifiers.GoForWalk),
                 PageDescription = "These activities are dedicated to taking a trip in the park.",
                 PageButton = "Select this option to take a walk.",
-                PageImage = "placeholder.png"
+                PageImage = "WalkPark.png"
+            });
+
+            taskModels.Add(new SocialInclusionTasks()
+            {
+                PageId = Identifiers.CoffeeShop,
+                PageTitle = Identifiers.GetDescription(Identifiers.CoffeeShop),
+                PageDescription = "Take a visit to the coffee shop.",
+                PageButton = "Select this option to have coffee.",
+                PageImage = "CoffeeShop.png"
             });
 
             taskModels.Add(new SocialInclusionTasks()
@@ -128,7 +137,7 @@ namespace AssistidCollector2.Tasks
                 PageTitle = Identifiers.GetDescription(Identifiers.CreatedActivity),
                 PageDescription = "This activity is one of your own choosing.",
                 PageButton = "Select this option to practice your activity.",
-                PageImage = "placeholder.png"
+                PageImage = "CreateOwn.png"
             });
 
             tapGestureRecognizer = new TapGestureRecognizer();
@@ -149,6 +158,11 @@ namespace AssistidCollector2.Tasks
             }
         }
 
+        /// <summary>
+        /// Taps the gesture recognizer tapped async.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
         async void TapGestureRecognizer_TappedAsync(object sender, EventArgs e)
         {
             var getCardTapped = sender as CardViewTemplate;
@@ -194,11 +208,15 @@ namespace AssistidCollector2.Tasks
 
                         break;
 
+                    case Identifiers.CoffeeShop:
+                        view = new TaskCoffee();
+
+                        break;
+
                     case Identifiers.SportGames:
                         view = new TaskSports();
 
                         break;
-
 
                     default:
                         view = new ContentPage();

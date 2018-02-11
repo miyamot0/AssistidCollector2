@@ -40,6 +40,7 @@ namespace AssistidCollector2.Enums
         public const int EnjoyExercise = 6;
         public const int GoForWalk = 7;
         public const int CreatedActivity = 8;
+        public const int CoffeeShop = 9;
 
         /// <summary>
         /// Gets the description.
@@ -76,6 +77,9 @@ namespace AssistidCollector2.Enums
 
                 case 8:
                     return "Create your own activity";
+
+                case 9:
+                    return "Visit a coffee shop";
 
                 default:
                     return "Error";

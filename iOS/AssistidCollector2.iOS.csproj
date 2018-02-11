@@ -192,6 +192,15 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\placeholder.png" />
+    <BundleResource Include="Resources\Music.png" />
+    <BundleResource Include="Resources\Movies.png" />
+    <BundleResource Include="Resources\Sports.png" />
+    <BundleResource Include="Resources\FoodShopping.png" />
+    <BundleResource Include="Resources\WalkDog.png" />
+    <BundleResource Include="Resources\WalkPark.png" />
+    <BundleResource Include="Resources\Exercise.png" />
+    <BundleResource Include="Resources\CreateOwn.png" />
+    <BundleResource Include="Resources\CoffeeShop.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.5.0.121934\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.5.0.121934\build\netstandard1.0\Xamarin.Forms.targets')" />
