@@ -78,6 +78,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Tasks\TaskSocialValidity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -142,6 +146,10 @@
     <Compile Include="Tasks\TaskCoffee.xaml.cs">
       <DependentUpon>TaskCoffee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tasks\TaskSocialValidity.xaml.cs">
+      <DependentUpon>TaskSocialValidity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Storage\SocialValidityModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

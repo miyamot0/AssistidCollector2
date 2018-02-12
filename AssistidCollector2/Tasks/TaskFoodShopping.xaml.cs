@@ -55,6 +55,29 @@ namespace AssistidCollector2.Tasks
         {
             if ((sender as Button) != null) { (sender as Button).IsEnabled = false; }
 
+            // Collect SV Data
+
+            EventWaitHandle waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
+
+            TaskSocialValidity mNewView = new TaskSocialValidity();
+
+            mNewView.Disappearing += (sender2, e2) =>
+            {
+                if (App.isTakingPictures == false)
+                {
+                    waitHandle.Set();
+                }
+            };
+
+            await Navigation.PushAsync(mNewView);
+
+            await Task.Run(() => waitHandle.WaitOne());
+
+            if (mNewView.GetBase64().Length == 0)
+            {
+                return;
+            }
+
             string returnString = ViewTools.CommaSeparatedValue("Data,Value", "InterventionCode," + PageType.ToString(),
                                                                 customPageStackContent, startTime, DateTime.Now.Subtract(startTime));
 

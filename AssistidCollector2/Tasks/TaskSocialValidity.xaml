@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="AssistidCollector2.Tasks.TaskSocialValidity">
+    
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <OnPlatform.Platforms>
+                <On Platform="iOS" Value="0, 20, 0, 0" />
+                <On Platform="Android" Value="0, 0, 0, 0" />
+                <On Platform="UWP" Value="0, 0, 0, 0" />
+            </OnPlatform.Platforms>
+        </OnPlatform>
+    </ContentPage.Padding>    
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label x:Name="socialValidityText"
+               Grid.Row="0"
+               Grid.Column="0"
+               Text=""/>
+
+        <StackLayout x:Name="Rating"
+            Orientation="Horizontal"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="FillAndExpand"
+            HeightRequest="100"
+            Grid.Row="1"
+            Grid.Column="0">
+
+            <Image x:Name="socialValidityNegative" 
+                   Source="SmileNegative.png" 
+                   Aspect="AspectFill"/>
+            <Image x:Name="socialValidityMiddle" 
+                   Source="SmileFrown.png" 
+                   Aspect="AspectFill"/>
+            <Image x:Name="socialValidityPositive" 
+                   Source="SmilePositive.png" 
+                   Aspect="AspectFill"/>
+
+        </StackLayout>
+
+        <Image x:Name="socialValidityPhoto"
+               Aspect="AspectFill"
+               Source="placeholder.png"
+               Margin="5"
+               Grid.Row="2"
+               Grid.Column="0"/>
+        
+        <Button x:Name="socialValidityTakePicture"
+                Text="Take Picture"
+                HorizontalOptions="FillAndExpand"
+                BackgroundColor="Blue"
+                TextColor="White"
+                Clicked="Take_PictureAsync"
+                Margin="5"
+                Grid.Row="3"
+                Grid.Column="0"/>
+
+        <Button x:Name="socialValidityButtonBottom"
+                Text="Save Results"
+                HorizontalOptions="FillAndExpand"
+                BackgroundColor="Green"
+                Clicked="Handle_ClickedAsync"
+                TextColor="White"
+                Margin="5"
+                Grid.Row="4"
+                Grid.Column="0"/>
+    </Grid>
+</ContentPage>
