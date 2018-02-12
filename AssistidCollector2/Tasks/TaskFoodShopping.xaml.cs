@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -59,7 +60,7 @@ namespace AssistidCollector2.Tasks
 
             EventWaitHandle waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
 
-            TaskSocialValidity mNewView = new TaskSocialValidity();
+            TaskSocialValidity mNewView = new TaskSocialValidity(PageType);
 
             mNewView.Disappearing += (sender2, e2) =>
             {
@@ -77,6 +78,8 @@ namespace AssistidCollector2.Tasks
             {
                 return;
             }
+
+            ///
 
             string returnString = ViewTools.CommaSeparatedValue("Data,Value", "InterventionCode," + PageType.ToString(),
                                                                 customPageStackContent, startTime, DateTime.Now.Subtract(startTime));
@@ -99,6 +102,8 @@ namespace AssistidCollector2.Tasks
                 using (IProgressDialog progress = UserDialogs.Instance.Progress(config))
                 {
                     await DropboxServer.UploadFile(new System.IO.MemoryStream(Encoding.UTF8.GetBytes(returnString)), App.Database.GetLargestID());
+
+                    await DropboxServer.UploadImage(new MemoryStream(Convert.FromBase64String(mNewView.GetBase64())), App.Database.GetLargestFeedbackID());
 
                     await Task.Delay(100);
                 }

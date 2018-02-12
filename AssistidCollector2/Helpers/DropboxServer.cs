@@ -176,6 +176,23 @@ namespace AssistidCollector2.Helpers
         }
 
         /// <summary>
+        /// Uploads the image.
+        /// </summary>
+        /// <returns>The image.</returns>
+        /// <param name="stream">Stream.</param>
+        /// <param name="fileNumber">File number.</param>
+        public static async Task<string> UploadImage(System.IO.MemoryStream stream, int fileNumber)
+        {
+            await Task.Delay(App.DropboxDeltaTimeout);
+
+            string filePath = "/img-" + App.ApplicationId + "/" + App.ApplicationId + "_" + fileNumber.ToString("d4") + ".png";
+
+            string result = await UploadFile(stream, filePath);
+
+            return result;            
+        }
+
+        /// <summary>
         /// Upload a message to cloud
         /// </summary>
         /// <param name="message"></param>

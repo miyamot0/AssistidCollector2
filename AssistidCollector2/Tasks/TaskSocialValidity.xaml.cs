@@ -6,6 +6,7 @@ using Acr.UserDialogs;
 using Plugin.Media;
 using Xamarin.Forms;
 using AssistidCollector2.Interfaces;
+using AssistidCollector2.Storage;
 
 namespace AssistidCollector2.Tasks
 {
@@ -13,10 +14,13 @@ namespace AssistidCollector2.Tasks
     {
         public string ImgBytes = "";
         public int AppRating = -1;
+        public int TaskType = -1;
 
-        public TaskSocialValidity()
+        public TaskSocialValidity(int taskType)
         {
             InitializeComponent();
+
+            TaskType = taskType;
 
             Title = "Take a Picture to Remember";
 
@@ -121,6 +125,13 @@ namespace AssistidCollector2.Tasks
             }
             else
             {
+                int result = await App.Database.SaveItemAsync(new SocialValidityModel()
+                {
+                    Rating = AppRating,
+                    Base64 = ImgBytes,
+                    TaskNumber = TaskType
+                });
+
                 await Navigation.PopAsync();
             }
         }
