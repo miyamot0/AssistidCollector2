@@ -223,6 +223,9 @@
     <AndroidResource Include="Resources\drawable\Exercise.png" />
     <AndroidResource Include="Resources\drawable\CreateOwn.png" />
     <AndroidResource Include="Resources\drawable\CoffeeShop.png" />
+    <AndroidResource Include="Resources\drawable\SmileFrown.png" />
+    <AndroidResource Include="Resources\drawable\SmileNegative.png" />
+    <AndroidResource Include="Resources\drawable\SmilePositive.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Implementations\" />
