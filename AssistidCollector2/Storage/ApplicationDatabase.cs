@@ -50,6 +50,7 @@ namespace AssistidCollector2.Storage
             database = new SQLiteAsyncConnection(dbPath);
             database.CreateTableAsync<SocialStepModel>().Wait();
             database.CreateTableAsync<StorageModel>().Wait();
+            database.CreateTableAsync<SocialValidityModel>().Wait();
         }
 
         public void Init() { }
@@ -79,6 +80,10 @@ namespace AssistidCollector2.Storage
             }
         }
 
+        /// <summary>
+        /// Gets the steps async.
+        /// </summary>
+        /// <returns>The steps async.</returns>
         public Task<List<SocialStepModel>> GetStepsAsync()
         {
             return database.Table<SocialStepModel>().ToListAsync();
@@ -128,6 +133,31 @@ namespace AssistidCollector2.Storage
         }
 
         /// <summary>
+        /// Gets the social validity.
+        /// </summary>
+        /// <returns>The social validity.</returns>
+        public Task<List<SocialValidityModel>> GetSocialValidity()
+        {
+            return database.Table<SocialValidityModel>().ToListAsync();
+        }
+
+        /// <summary>
+        /// Gets the largest feedback identifier.
+        /// </summary>
+        /// <returns>The largest feedback identifier.</returns>
+        public int GetLargestFeedbackID()
+        {
+            try
+            {
+                return GetSocialValidity().Result.Aggregate((i1, i2) => i1.ID > i2.ID ? i1 : i2).ID;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
         /// Save item
         /// </summary>
         /// <param name="item"></param>
@@ -147,6 +177,21 @@ namespace AssistidCollector2.Storage
             return database.InsertAsync(item);
         }
 
+        /// <summary>
+        /// Saves the item async.
+        /// </summary>
+        /// <returns>The item async.</returns>
+        /// <param name="item">Item.</param>
+        public Task<int> SaveItemAsync(SocialValidityModel item)
+        {
+            return database.InsertAsync(item);
+        }
+
+        /// <summary>
+        /// Deletes the step async.
+        /// </summary>
+        /// <returns>The step async.</returns>
+        /// <param name="ID">Identifier.</param>
         public Task<int> DeleteStepAsync(int ID)
         {
             SocialStepModel item = GetStepsAsync().Result.Where(m => m.ID == ID).First();
