@@ -77,7 +77,7 @@ namespace AssistidCollector2.Tasks
                         Name = $"{DateTime.UtcNow}.jpg",
                         PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium,
                         CompressionQuality = 80,
-                        SaveToAlbum = true,
+                        //SaveToAlbum = true,
                     };
 
                     using (Plugin.Media.Abstractions.MediaFile file = await CrossMedia.Current.TakePhotoAsync(mediaOptions))

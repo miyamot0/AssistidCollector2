@@ -25,11 +25,18 @@ namespace AssistidCollector2.Droid
 
             UserDialogs.Init(this);
 
+            Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity = this;
+
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             LoadApplication(new App());
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
+        {
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

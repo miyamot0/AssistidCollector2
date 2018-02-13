@@ -5177,6 +5177,9 @@ namespace AssistidCollector2.Droid
 			// aapt resource value: 0x7f070000
 			public const int admin = 2131165184;
 			
+			// aapt resource value: 0x7f070001
+			public const int file_paths = 2131165185;
+			
 			static Xml()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
