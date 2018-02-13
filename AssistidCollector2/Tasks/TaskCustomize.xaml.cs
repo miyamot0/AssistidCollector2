@@ -15,6 +15,7 @@ using Xamarin.Forms.Internals;
 using AssistidCollector2.Helpers;
 using Plugin.Connectivity;
 using System.Text;
+using System.IO;
 
 namespace AssistidCollector2.Tasks
 {
@@ -60,7 +61,30 @@ namespace AssistidCollector2.Tasks
         {
             if ((sender as Button) != null) { (sender as Button).IsEnabled = false; }
 
-            string returnString = ViewTools.CommaSeparatedValue("Data,Value", "InterventionCode," + PageType.ToString(),
+            EventWaitHandle waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
+
+            TaskSocialValidity mNewView = new TaskSocialValidity(PageType);
+
+            mNewView.Disappearing += (sender2, e2) =>
+            {
+                if (App.isTakingPictures == false)
+                {
+                    waitHandle.Set();
+                }
+            };
+
+            await Navigation.PushAsync(mNewView);
+
+            await Task.Run(() => waitHandle.WaitOne());
+
+            if (mNewView.GetBase64().Length == 0)
+            {
+                return;
+            }
+
+            string returnString = ViewTools.CommaSeparatedValue("Data,Value",
+                                                                "InterventionCode," + PageType.ToString(),
+                                                                mNewView.AppRating,
                                                                 customPageStackContent, startTime, DateTime.Now.Subtract(startTime));
 
             int result = await App.Database.SaveItemAsync(new StorageModel()
@@ -81,6 +105,8 @@ namespace AssistidCollector2.Tasks
                 using (IProgressDialog progress = UserDialogs.Instance.Progress(config))
                 {
                     await DropboxServer.UploadFile(new System.IO.MemoryStream(Encoding.UTF8.GetBytes(returnString)), App.Database.GetLargestID());
+
+                    await DropboxServer.UploadImage(new MemoryStream(Convert.FromBase64String(mNewView.GetBase64())), App.Database.GetLargestFeedbackID());
 
                     await Task.Delay(100);
                 }

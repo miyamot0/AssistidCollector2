@@ -56,8 +56,6 @@ namespace AssistidCollector2.Tasks
         {
             if ((sender as Button) != null) { (sender as Button).IsEnabled = false; }
 
-            // Collect SV Data
-
             EventWaitHandle waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
 
             TaskSocialValidity mNewView = new TaskSocialValidity(PageType);
@@ -79,9 +77,9 @@ namespace AssistidCollector2.Tasks
                 return;
             }
 
-            ///
-
-            string returnString = ViewTools.CommaSeparatedValue("Data,Value", "InterventionCode," + PageType.ToString(),
+            string returnString = ViewTools.CommaSeparatedValue("Data,Value", 
+                                                                "InterventionCode," + PageType.ToString(),
+                                                                mNewView.AppRating,
                                                                 customPageStackContent, startTime, DateTime.Now.Subtract(startTime));
 
             int result = await App.Database.SaveItemAsync(new StorageModel()

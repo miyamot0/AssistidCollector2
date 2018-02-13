@@ -42,10 +42,22 @@ namespace AssistidCollector2.Helpers
 {
     public static class ViewTools
     {
-        public static string CommaSeparatedValue(string header, string intervention, StackLayout layout, DateTime startTime, TimeSpan timeDifference)
+        /// <summary>
+        /// Commas the separated value.
+        /// </summary>
+        /// <returns>The separated value.</returns>
+        /// <param name="header">Header.</param>
+        /// <param name="intervention">Intervention.</param>
+        /// <param name="rating">Rating.</param>
+        /// <param name="layout">Layout.</param>
+        /// <param name="startTime">Start time.</param>
+        /// <param name="timeDifference">Time difference.</param>
+        public static string CommaSeparatedValue(string header, string intervention, int rating,
+                                                 StackLayout layout, DateTime startTime, TimeSpan timeDifference)
         {
             string returnString = header + Environment.NewLine;
             returnString += intervention + Environment.NewLine;
+            returnString += "Rating," + rating.ToString() + Environment.NewLine;
 
             CardViewStepTemplate holder;
 
@@ -66,6 +78,12 @@ namespace AssistidCollector2.Helpers
             return returnString;
         }
 
+        /// <summary>
+        /// Handles the poll data async.
+        /// </summary>
+        /// <param name="taskModels">Task models.</param>
+        /// <param name="customPageStackContent">Custom page stack content.</param>
+        /// <param name="PageType">Page type.</param>
         public static async void HandlePollDataAsync(List<SocialInclusionStep> taskModels, StackLayout customPageStackContent, int PageType)
         {
             try
@@ -112,6 +130,12 @@ namespace AssistidCollector2.Helpers
             }
         }
 
+        /// <summary>
+        /// Handles the step added async.
+        /// </summary>
+        /// <param name="taskModels">Task models.</param>
+        /// <param name="customPageStackContent">Custom page stack content.</param>
+        /// <param name="PageType">Page type.</param>
         public static async void HandleStepAddedAsync(List<SocialInclusionStep> taskModels, StackLayout customPageStackContent, int PageType)
         {
             if (App.temporaryStep.Title == "" ||
@@ -154,6 +178,12 @@ namespace AssistidCollector2.Helpers
             }            
         }
 
+        /// <summary>
+        /// Handles the step removal async.
+        /// </summary>
+        /// <param name="taskModels">Task models.</param>
+        /// <param name="customPageStackContent">Custom page stack content.</param>
+        /// <param name="pollForDataAsync">Poll for data async.</param>
         public static async void HandleStepRemovalAsync(List<SocialInclusionStep> taskModels, StackLayout customPageStackContent, Action pollForDataAsync)
         {
             string[] stepsInList = taskModels.Select(m => m.Title).ToArray();
