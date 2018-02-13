@@ -82,6 +82,36 @@ namespace AssistidCollector2.Helpers
         }
 
         /// <summary>
+        /// Counts the feedback files.
+        /// </summary>
+        /// <returns>The feedback files.</returns>
+        public static async Task<ListFolderResult> CountFeedbackFiles()
+        {
+            await Task.Delay(App.DropboxDeltaTimeout);
+
+            try
+            {
+                ListFolderResult response = await App.DropboxClient.Files.ListFolderAsync("/img-" + App.ApplicationId);
+
+                if (response == null || response.Entries.Count == 0)
+                {
+                    return null;
+                }
+
+                return response;
+
+            }
+            catch (Dropbox.Api.ApiException<GetMetadataError>)
+            {
+                return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
         /// Upload file
         /// </summary>
         /// <param name="stream"></param>

@@ -44,6 +44,7 @@ using AssistidCollector2.Helpers;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace AssistidCollector2.Tasks
 {
@@ -325,9 +326,39 @@ namespace AssistidCollector2.Tasks
 
                             await DropboxServer.UploadFile(new System.IO.MemoryStream(Encoding.UTF8.GetBytes(mStorageModel.CSV)), mStorageModel.ID);
                         }
+                    }
+                }
+                catch (Exception exc)
+                {
+                    Debug.WriteLineIf(App.Debugging, exc.ToString());
+                }
 
-                        /*
-                        foreach (int index in missing)
+                try
+                {
+                    ListFolderResult serverFiles = await DropboxServer.CountFeedbackFiles();
+                    List<SocialValidityModel> currentData = await App.Database.GetSocialValidity();
+
+                    if (serverFiles == null || currentData == null || cancelSrc.IsCancellationRequested)
+                    {
+                        // Nothing.. just move on
+                    }
+                    else if (currentData.Count == serverFiles.Entries.Count)
+                    {
+                        // Same.. no worries
+                    }
+                    else if (currentData.Count > serverFiles.Entries.Count)
+                    {
+                        List<int> localIds = currentData.Select(l => l.ID).ToList();
+
+                        List<string> remoteIdsStr = serverFiles.Entries.Select(r => r.Name).ToList();
+                        remoteIdsStr = remoteIdsStr.Select(r => r.Split('_')[1]).ToList();
+                        remoteIdsStr = remoteIdsStr.Select(r => r.Split('.')[0]).ToList();
+
+                        List<int> remoteIds = remoteIdsStr.Select(r => int.Parse(r)).ToList();
+
+                        var missing = localIds.Except(remoteIds);
+
+                        for (int count = 0; count < missing.Count() && !cancelSrc.IsCancellationRequested; count++)
                         {
                             if (cancelSrc.IsCancellationRequested)
                             {
@@ -337,12 +368,13 @@ namespace AssistidCollector2.Tasks
                             {
                                 await Task.Delay(App.DropboxDeltaTimeout);
                             }
+
                             progress.Title = "Uploading File " + (count + 1) + " of " + missing.Count().ToString();
-                            var mStorageModel = currentData.Single(m => m.ID == index);
-                            await DropboxServer.UploadFile(new System.IO.MemoryStream(Encoding.UTF8.GetBytes(mStorageModel.CSV)), mStorageModel.ID);
-                            count++;
+
+                            var mStorageModel = currentData.Single(m => m.ID == missing.ElementAt(count));
+
+                            await DropboxServer.UploadImage(new MemoryStream(Convert.FromBase64String(mStorageModel.Base64)), mStorageModel.ID);
                         }
-                        */
                     }
                 }
                 catch (Exception exc)
