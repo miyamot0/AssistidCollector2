@@ -77,6 +77,8 @@ namespace AssistidCollector2.Tasks
 
             await Task.Run(() => waitHandle.WaitOne());
 
+            (sender as Button).IsEnabled = true;
+
             if (mNewView.GetBase64().Length == 0)
             {
                 return;
