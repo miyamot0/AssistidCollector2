@@ -1,5 +1,4 @@
-﻿using System;
-using AssistidCollector2.Interfaces;
+﻿using AssistidCollector2.Interfaces;
 using AssistidCollector2.iOS.Implementations;
 using AVFoundation;
 using Xamarin.Forms;

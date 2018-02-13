@@ -1,11 +1,9 @@
 ﻿using System;
 
 using Xamarin.Forms;
-using AssistidCollector2.Enums;
 using AssistidCollector2.Models;
 using AssistidCollector1.Views;
 using System.IO;
-using System.Diagnostics;
 using AssistidCollector2.Interfaces;
 
 namespace AssistidCollector2.Views

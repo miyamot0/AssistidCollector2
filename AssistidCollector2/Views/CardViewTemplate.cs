@@ -51,8 +51,6 @@
 //
 //----------------------------------------------------------------------------------------------
 
-using System;
-using AssistidCollector2.Enums;
 using Xamarin.Forms;
 using AssistidCollector2.Models;
 using AssistidCollector1.Views;

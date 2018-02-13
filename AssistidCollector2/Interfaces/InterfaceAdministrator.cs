@@ -25,7 +25,6 @@
 // </summary>
 //----------------------------------------------------------------------------------------------
 
-using System;
 
 namespace AssistidCollector2.Interfaces
 {

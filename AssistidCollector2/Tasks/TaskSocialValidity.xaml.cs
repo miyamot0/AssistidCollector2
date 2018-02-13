@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using Acr.UserDialogs;
@@ -14,6 +13,8 @@ namespace AssistidCollector2.Tasks
     {
         public string ImgBytes = "";
         public int AppRating = -1;
+        public int AppRating2 = -1;
+        public int AppRating3 = -1;
         public int TaskType = -1;
 
         public TaskSocialValidity(int taskType)
@@ -34,6 +35,14 @@ namespace AssistidCollector2.Tasks
             socialValidityNegative.GestureRecognizers.Add(tgr);
             socialValidityMiddle.GestureRecognizers.Add(tgr);
             socialValidityPositive.GestureRecognizers.Add(tgr);
+
+            socialValidityNegative2.GestureRecognizers.Add(tgr);
+            socialValidityMiddle2.GestureRecognizers.Add(tgr);
+            socialValidityPositive2.GestureRecognizers.Add(tgr);
+
+            socialValidityNegative3.GestureRecognizers.Add(tgr);
+            socialValidityMiddle3.GestureRecognizers.Add(tgr);
+            socialValidityPositive3.GestureRecognizers.Add(tgr);
         }
 
         /// <summary>
@@ -111,7 +120,7 @@ namespace AssistidCollector2.Tasks
         /// <param name="e">E.</param>
         async void Handle_ClickedAsync(object sender, System.EventArgs e)
         {
-            if (AppRating == -1)
+            if (AppRating == -1 || AppRating2 == -1 || AppRating3 == -1)
             {
                 await UserDialogs.Instance.AlertAsync("Please rate the app");
 
@@ -128,6 +137,8 @@ namespace AssistidCollector2.Tasks
                 int result = await App.Database.SaveItemAsync(new SocialValidityModel()
                 {
                     Rating = AppRating,
+                    Rating2 = AppRating2,
+                    Rating3 = AppRating3,
                     Base64 = ImgBytes,
                     TaskNumber = TaskType
                 });
@@ -171,6 +182,60 @@ namespace AssistidCollector2.Tasks
 
                     AppRating = 3;
                 }
+
+                //
+
+                else if (img.Id == socialValidityNegative2.Id)
+                {
+                    ResetColors2();
+
+                    socialValidityNegative2.BackgroundColor = Color.LightGreen;
+
+                    AppRating2 = 1;
+                }
+                else if (img.Id == socialValidityMiddle2.Id)
+                {
+                    ResetColors2();
+
+                    socialValidityMiddle2.BackgroundColor = Color.LightGreen;
+
+                    AppRating2 = 2;
+                }
+                else if (img.Id == socialValidityPositive2.Id)
+                {
+                    ResetColors2();
+
+                    socialValidityPositive2.BackgroundColor = Color.LightGreen;
+
+                    AppRating2 = 3;
+                }
+
+                //
+
+                else if (img.Id == socialValidityNegative3.Id)
+                {
+                    ResetColors3();
+
+                    socialValidityNegative3.BackgroundColor = Color.LightGreen;
+
+                    AppRating3 = 1;
+                }
+                else if (img.Id == socialValidityMiddle3.Id)
+                {
+                    ResetColors3();
+
+                    socialValidityMiddle3.BackgroundColor = Color.LightGreen;
+
+                    AppRating3 = 2;
+                }
+                else if (img.Id == socialValidityPositive3.Id)
+                {
+                    ResetColors3();
+
+                    socialValidityPositive3.BackgroundColor = Color.LightGreen;
+
+                    AppRating3 = 3;
+                }
             }
         }
 
@@ -182,6 +247,26 @@ namespace AssistidCollector2.Tasks
             socialValidityNegative.BackgroundColor = Color.Transparent;
             socialValidityMiddle.BackgroundColor = Color.Transparent;
             socialValidityPositive.BackgroundColor = Color.Transparent;
+        }
+
+        /// <summary>
+        /// Resets the colors.
+        /// </summary>
+        void ResetColors2()
+        {
+            socialValidityNegative2.BackgroundColor = Color.Transparent;
+            socialValidityMiddle2.BackgroundColor = Color.Transparent;
+            socialValidityPositive2.BackgroundColor = Color.Transparent;
+        }
+
+        /// <summary>
+        /// Resets the colors.
+        /// </summary>
+        void ResetColors3()
+        {
+            socialValidityNegative3.BackgroundColor = Color.Transparent;
+            socialValidityMiddle3.BackgroundColor = Color.Transparent;
+            socialValidityPositive3.BackgroundColor = Color.Transparent;
         }
     }
 }

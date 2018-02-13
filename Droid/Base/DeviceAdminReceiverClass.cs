@@ -25,12 +25,9 @@
 // </summary>
 //----------------------------------------------------------------------------------------------
 
-using System;
-using Android;
 using Android.App;
 using Android.App.Admin;
 using Android.Content;
-using Android.Content.PM;
 
 namespace AssistidCollector2.Droid.Base
 {

@@ -25,8 +25,6 @@
 // </summary>
 //----------------------------------------------------------------------------------------------
 
-using System;
-using AssistidCollector2.Enums;
 
 namespace AssistidCollector2.Models
 {

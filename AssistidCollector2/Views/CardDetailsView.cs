@@ -51,7 +51,6 @@
 //
 //----------------------------------------------------------------------------------------------
 
-using System;
 using Xamarin.Forms;
 
 namespace AssistidCollector1.Views

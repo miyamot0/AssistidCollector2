@@ -25,7 +25,6 @@
 // </summary>
 //----------------------------------------------------------------------------------------------
 
-using System;
 using SQLite;
 
 namespace AssistidCollector2.Storage

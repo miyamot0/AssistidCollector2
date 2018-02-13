@@ -52,12 +52,14 @@ namespace AssistidCollector2.Helpers
         /// <param name="layout">Layout.</param>
         /// <param name="startTime">Start time.</param>
         /// <param name="timeDifference">Time difference.</param>
-        public static string CommaSeparatedValue(string header, string intervention, int rating,
+        public static string CommaSeparatedValue(string header, string intervention, int rating, int rating2, int rating3,
                                                  StackLayout layout, DateTime startTime, TimeSpan timeDifference)
         {
             string returnString = header + Environment.NewLine;
             returnString += intervention + Environment.NewLine;
-            returnString += "Rating," + rating.ToString() + Environment.NewLine;
+            returnString += "Rating1," + rating.ToString() + Environment.NewLine;
+            returnString += "Rating2," + rating2.ToString() + Environment.NewLine;
+            returnString += "Rating3," + rating3.ToString() + Environment.NewLine;
 
             CardViewStepTemplate holder;
 

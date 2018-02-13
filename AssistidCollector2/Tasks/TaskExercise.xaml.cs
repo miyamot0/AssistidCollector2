@@ -81,7 +81,7 @@ namespace AssistidCollector2.Tasks
 
             string returnString = ViewTools.CommaSeparatedValue("Data,Value",
                                                                 "InterventionCode," + PageType.ToString(),
-                                                                mNewView.AppRating,
+                                                                mNewView.AppRating, mNewView.AppRating2, mNewView.AppRating3,
                                                                 customPageStackContent, startTime, DateTime.Now.Subtract(startTime));
 
             int result = await App.Database.SaveItemAsync(new StorageModel()

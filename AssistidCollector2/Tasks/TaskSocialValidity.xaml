@@ -11,27 +11,35 @@
                 <On Platform="UWP" Value="0, 0, 0, 0" />
             </OnPlatform.Platforms>
         </OnPlatform>
-    </ContentPage.Padding>    
+    </ContentPage.Padding>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <ScrollView>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-        <Label x:Name="socialValidityText"
+                <Label x:Name="socialValidityText"
                Grid.Row="0"
                Grid.Column="0"
-               Text=""/>
+               FontSize="Default"
+               FormattedText="Bold"
+               Text="Did you enjoy this activity"/>
 
-        <StackLayout x:Name="Rating"
+                <StackLayout x:Name="Rating"
             Orientation="Horizontal"
             HorizontalOptions="CenterAndExpand"
             VerticalOptions="FillAndExpand"
@@ -39,42 +47,98 @@
             Grid.Row="1"
             Grid.Column="0">
 
-            <Image x:Name="socialValidityNegative" 
+                    <Image x:Name="socialValidityNegative" 
                    Source="SmileNegative.png" 
                    Aspect="AspectFill"/>
-            <Image x:Name="socialValidityMiddle" 
+                    <Image x:Name="socialValidityMiddle" 
                    Source="SmileFrown.png" 
                    Aspect="AspectFill"/>
-            <Image x:Name="socialValidityPositive" 
+                    <Image x:Name="socialValidityPositive" 
                    Source="SmilePositive.png" 
                    Aspect="AspectFill"/>
 
-        </StackLayout>
+                </StackLayout>
 
-        <Image x:Name="socialValidityPhoto"
+                <Label x:Name="socialValidityText2"
+               Grid.Row="2"
+               Grid.Column="0"
+               FontSize="Default"
+               FormattedText="Bold"
+               Text="Were the steps of the activity easy to understand and follow"/>
+
+                <StackLayout x:Name="Rating2"
+            Orientation="Horizontal"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="FillAndExpand"
+            HeightRequest="100"
+            Grid.Row="3"
+            Grid.Column="0">
+
+                    <Image x:Name="socialValidityNegative2" 
+                   Source="SmileNegative.png" 
+                   Aspect="AspectFill"/>
+                    <Image x:Name="socialValidityMiddle2" 
+                   Source="SmileFrown.png" 
+                   Aspect="AspectFill"/>
+                    <Image x:Name="socialValidityPositive2" 
+                   Source="SmilePositive.png" 
+                   Aspect="AspectFill"/>
+
+                </StackLayout>
+
+                <Label x:Name="socialValidityText3"
+               Grid.Row="4"
+               Grid.Column="0"
+               FontSize="Default"
+               FormattedText="Bold"
+               Text="Was the ESISM app helpful to you"/>
+
+                <StackLayout x:Name="Rating3"
+            Orientation="Horizontal"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="FillAndExpand"
+            HeightRequest="100"
+            Grid.Row="5"
+            Grid.Column="0">
+
+                    <Image x:Name="socialValidityNegative3" 
+                   Source="SmileNegative.png" 
+                   Aspect="AspectFill"/>
+                    <Image x:Name="socialValidityMiddle3" 
+                   Source="SmileFrown.png" 
+                   Aspect="AspectFill"/>
+                    <Image x:Name="socialValidityPositive3" 
+                   Source="SmilePositive.png" 
+                   Aspect="AspectFill"/>
+
+                </StackLayout>
+
+                <Image x:Name="socialValidityPhoto"
                Aspect="AspectFill"
                Margin="5"
-               Grid.Row="2"
+               Grid.Row="6"
                Grid.Column="0"/>
-        
-        <Button x:Name="socialValidityTakePicture"
+
+                <Button x:Name="socialValidityTakePicture"
                 Text="Take Picture"
                 HorizontalOptions="FillAndExpand"
                 BackgroundColor="Blue"
                 TextColor="White"
                 Clicked="Take_PictureAsync"
                 Margin="5"
-                Grid.Row="3"
+                Grid.Row="7"
                 Grid.Column="0"/>
 
-        <Button x:Name="socialValidityButtonBottom"
+                <Button x:Name="socialValidityButtonBottom"
                 Text="Save Results"
                 HorizontalOptions="FillAndExpand"
                 BackgroundColor="Green"
                 Clicked="Handle_ClickedAsync"
                 TextColor="White"
                 Margin="5"
-                Grid.Row="4"
+                Grid.Row="8"
                 Grid.Column="0"/>
-    </Grid>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
