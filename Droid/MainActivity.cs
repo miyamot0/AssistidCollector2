@@ -9,6 +9,7 @@ using Android.Widget;
 using Android.OS;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using Acr.UserDialogs;
 
 namespace AssistidCollector2.Droid
 {
@@ -21,6 +22,8 @@ namespace AssistidCollector2.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+
+            UserDialogs.Init(this);
 
             base.OnCreate(bundle);
 

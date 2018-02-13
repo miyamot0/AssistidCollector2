@@ -75,7 +75,7 @@ namespace AssistidCollector1.Views
                     new Label()
                     {
                         Text = buttonText,
-                        FontSize = 9,
+                        FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Label)),
                         FontAttributes = FontAttributes.Bold,
                         TextColor = Color.FromHex("383838")
                     }
