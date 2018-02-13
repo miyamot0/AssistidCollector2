@@ -34,7 +34,7 @@ namespace AssistidCollector2.Droid.Base
     /// <summary>
     /// Device admin receiver class.
     /// </summary>
-    [BroadcastReceiver(Permission = "android.permission.BIND_DEVICE_ADMIN", Name = "com.smallnstats.AssistidCollector1.Base.DeviceAdminReceiverClass")]
+    [BroadcastReceiver(Permission = "android.permission.BIND_DEVICE_ADMIN", Name = "com.smallnstats.AssistidCollector2.Base.DeviceAdminReceiverClass")]
     [MetaData("android.app.device_admin", Resource = "@xml/admin")]
     [IntentFilter(new[] { "android.app.action.DEVICE_ADMIN_ENABLED", Intent.ActionMain })]
     public class DeviceAdminReceiverClass : DeviceAdminReceiver { }
