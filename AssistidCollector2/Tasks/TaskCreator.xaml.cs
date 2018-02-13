@@ -54,6 +54,8 @@ namespace AssistidCollector2.Tasks
         {
             InitializeComponent();
 
+            Title = "Add a new step";
+
             NavigationPage.SetHasNavigationBar(this, true);
             NavigationPage.SetHasBackButton(this, true);
             NavigationPage.SetBackButtonTitle(this, "Back");
@@ -117,6 +119,24 @@ namespace AssistidCollector2.Tasks
 
                 Debug.WriteLineIf(App.Debugging, e2.ToString());
             }
+        }
+
+        /// <summary>
+        /// Base methods
+        /// </summary>
+        /// <returns></returns>
+        protected override bool OnBackButtonPressed()
+        {
+            App.temporaryStep = new Models.SocialInclusionStep()
+            {
+                Title = "",
+                Description = "",
+                ImgBytes = ""
+            };
+
+            base.OnBackButtonPressed();
+
+            return false;
         }
 
         /// <summary>

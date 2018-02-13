@@ -133,9 +133,14 @@ namespace AssistidCollector2.Tasks
                 }
             };
 
-            await Navigation.PushModalAsync(mNewView);
+            await Navigation.PushAsync(mNewView);
 
             await Task.Run(() => waitHandle.WaitOne());
+
+            if (App.temporaryStep.Description == "" || App.temporaryStep.Title == "")
+            {
+                return;
+            }
 
             //Debug.WriteLineIf(App.Debugging, "Fired");
 

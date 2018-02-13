@@ -4,14 +4,10 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using AssistidCollector2.Models;
 using AssistidCollector2.Enums;
-using AssistidCollector2.Views;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
 using AssistidCollector2.Storage;
-using System.Linq;
-using Xamarin.Forms.Internals;
 using AssistidCollector2.Helpers;
 using Plugin.Connectivity;
 using System.Text;
@@ -138,9 +134,14 @@ namespace AssistidCollector2.Tasks
                 }
             };
 
-            await Navigation.PushModalAsync(mNewView);
+            await Navigation.PushAsync(mNewView);
 
             await Task.Run(() => waitHandle.WaitOne());
+
+            if (App.temporaryStep.Description == "" || App.temporaryStep.Title == "")
+            {
+                return;
+            }
 
             //Debug.WriteLineIf(App.Debugging, "Fired");
 
