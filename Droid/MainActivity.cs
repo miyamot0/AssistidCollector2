@@ -1,17 +1,33 @@
 ﻿
 using Android.App;
 using Android.Content.PM;
+using Android.Content;
 using Android.OS;
-using Plugin.Permissions;
 using Acr.UserDialogs;
+using Plugin.Permissions;
 
 namespace AssistidCollector2.Droid
 {
-    [Activity(Label = "AssistidCollector2.Droid", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Social Inclusion App",
+        AlwaysRetainTaskState = true,
+        Icon = "@drawable/icon",
+        ScreenOrientation = ScreenOrientation.Portrait,
+        MainLauncher = true,
+        Theme = "@style/MyTheme",
+        HardwareAccelerated = true,
+        MultiProcess = true,
+        ConfigurationChanges = ConfigChanges.Orientation |
+                               ConfigChanges.ScreenSize |
+                               ConfigChanges.Keyboard |
+                               ConfigChanges.KeyboardHidden)]
+    [IntentFilter(new[] { Intent.ActionMain },
+        Categories = new[]
+        {
+                Intent.CategoryHome,
+                Android.Content.Intent.CategoryDefault
+        })]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        public static Activity MainApplicationActivity;
-
         protected override void OnCreate(Bundle bundle)
         {
             TabLayoutResource = Resource.Layout.Tabbar;

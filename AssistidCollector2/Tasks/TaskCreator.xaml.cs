@@ -167,7 +167,7 @@ namespace AssistidCollector2.Tasks
                     ImgBytes = StepImgBytes
                 };
 
-                await Navigation.PopModalAsync();
+                await Navigation.PopAsync();
             }
         }
     }

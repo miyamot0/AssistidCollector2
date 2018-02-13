@@ -170,6 +170,13 @@ namespace AssistidCollector2.Tasks
 
             ContentPage view = null;
 
+            App.temporaryStep = new Models.SocialInclusionStep()
+            {
+                Title = "",
+                Description = "",
+                ImgBytes = ""
+            };
+
             if (getCardTapped != null)
             {
                 switch (getCardTapped.PageId)

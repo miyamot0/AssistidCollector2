@@ -138,7 +138,7 @@ namespace AssistidCollector2.Tasks
 
             await Task.Run(() => waitHandle.WaitOne());
 
-            if (App.temporaryStep.Description == "" || App.temporaryStep.Title == "")
+            if (App.temporaryStep.Description == "" || App.temporaryStep.Title == "" || App.temporaryStep.ImgBytes == "")
             {
                 return;
             }

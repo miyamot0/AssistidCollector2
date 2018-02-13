@@ -44,7 +44,7 @@ namespace AssistidCollector2.Droid.Implementations
         /// </summary>
         public void AccessSettings()
         {
-            MainActivity.MainApplicationActivity.StartActivityForResult(new Intent(Android.Provider.Settings.ActionSettings), 0);
+            Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity.StartActivityForResult(new Intent(Android.Provider.Settings.ActionSettings), 0);
         }
 
         /// <summary>
@@ -76,11 +76,11 @@ namespace AssistidCollector2.Droid.Implementations
                 {
                     if (status)
                     {
-                        MainActivity.MainApplicationActivity.StartLockTask();
+                        Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity.StartLockTask();
                     }
                     else
                     {
-                        MainActivity.MainApplicationActivity.StopLockTask();
+                        Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity.StopLockTask();
                     }
                 }
             }
