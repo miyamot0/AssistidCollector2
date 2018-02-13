@@ -67,7 +67,7 @@ namespace AssistidCollector2.Helpers
 
                 if (holder != null)
                 {
-                    returnString += holder.itemDescription + "," + holder.WasActivated + Environment.NewLine;
+                    returnString += holder.itemDescription.Replace(',', '_') + "," + holder.WasActivated + Environment.NewLine;
                 }
             }
 
