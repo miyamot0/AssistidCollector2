@@ -146,7 +146,14 @@ namespace AssistidCollector2
         /// </summary>
         public static void ReloadDropbox()
         {
-            dropboxClient = new DropboxClient(AccessToken, new DropboxClientConfig(ApplicationName));
+            DropboxClientConfig mConfig = new DropboxClientConfig(ApplicationName);
+
+            mConfig.HttpClient = new System.Net.Http.HttpClient();
+            mConfig.HttpClient.Timeout = new TimeSpan(0, 0, 30);
+            mConfig.LongPollHttpClient = new System.Net.Http.HttpClient();
+            mConfig.LongPollHttpClient.Timeout = new TimeSpan(0, 0, 30);
+
+            dropboxClient = new DropboxClient(AccessToken, mConfig);
         }
 
         public void ShowStartPage()

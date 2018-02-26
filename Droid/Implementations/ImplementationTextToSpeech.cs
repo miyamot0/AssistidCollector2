@@ -33,6 +33,7 @@ namespace AssistidCollector2.Droid.Implementations
                 int amStreamMusicMaxVol = am.GetStreamMaxVolume(Android.Media.Stream.Music);
                 am.SetStreamVolume(Stream.Music, amStreamMusicMaxVol, 0);
                 speaker = new TextToSpeech(ctx, this);
+                speaker.SetSpeechRate(0.25f);
             }
             else
             {

@@ -14,7 +14,7 @@ namespace AssistidCollector2.iOS.Implementations
 
             var speechUtterance = new AVSpeechUtterance(text)
             {
-                Rate = AVSpeechUtterance.MaximumSpeechRate / 3,
+                Rate = AVSpeechUtterance.DefaultSpeechRate / 4f,
                 Voice = AVSpeechSynthesisVoice.FromLanguage("en-US"),
                 Volume = 0.9f,
                 PitchMultiplier = 1.0f
