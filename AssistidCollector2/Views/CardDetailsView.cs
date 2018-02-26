@@ -73,13 +73,13 @@ namespace AssistidCollector1.Views
                     new Label()
                     {
                         FormattedText = Text,
-                        FontSize = 18,
+                        FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
                         TextColor = Color.FromHex("383838")
                     },
                     new Label()
                     {
                         FormattedText = Description,
-                        FontSize = 12,
+                        FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Label)),
                         TextColor = Color.FromHex("383838")
                     },
                 }
@@ -99,13 +99,13 @@ namespace AssistidCollector1.Views
                     new Label()
                     {
                         FormattedText = Text,
-                        FontSize = 18,
+                        FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
                         TextColor = Color.FromHex("383838")
                     },
                     new Label()
                     {
                         FormattedText = Description,
-                        FontSize = 12,
+                        FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Label)),
                         TextColor = Color.FromHex("383838")
                     },
                 }

@@ -157,6 +157,9 @@ namespace AssistidCollector2.Tasks
             {
                 ToolbarItems.Remove(settingsItem);
             }
+
+            //Title = App.ApplicationId;
+            Title = "Home";
         }
 
         /// <summary>
@@ -167,6 +170,8 @@ namespace AssistidCollector2.Tasks
         async void TapGestureRecognizer_TappedAsync(object sender, EventArgs e)
         {
             var getCardTapped = sender as CardViewTemplate;
+
+            //NavigationPage navPage = null;
 
             ContentPage view = null;
 
@@ -232,9 +237,15 @@ namespace AssistidCollector2.Tasks
                         break;
                 }
 
+                //if (view != null)
+                //{
+                //    navPage = new NavigationPage(view);
+                //}
+
                 App.RefreshServer = false;
 
                 view.Disappearing += (sender2, e2) =>
+                //navPage.Disappearing += (sender2, e2) =>
                 {
                     if (App.RefreshServer)
                     {
@@ -245,6 +256,7 @@ namespace AssistidCollector2.Tasks
                 };
 
                 await Navigation.PushAsync(view, true);
+                //await Navigation.PushAsync(navPage, true);
             }
         }
 

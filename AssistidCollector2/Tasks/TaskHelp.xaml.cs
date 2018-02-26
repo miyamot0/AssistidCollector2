@@ -35,6 +35,8 @@ namespace AssistidCollector2.Tasks
         public TaskHelp()
         {
             InitializeComponent();
+
+            idNumber.Text = App.ApplicationId.ToString();
         }
 
         async void Handle_ClickedAsync(object sender, System.EventArgs e)

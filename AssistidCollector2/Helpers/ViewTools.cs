@@ -195,34 +195,51 @@ namespace AssistidCollector2.Helpers
                 return;
             }
 
-            string destroyString = "OK";
-
             CancellationTokenSource cancelSrc = new CancellationTokenSource();
 
-            string result = await UserDialogs.Instance.ActionSheetAsync("Pick Item to Edit", "Close", destroyString, cancelSrc.Token, stepsInList);
+            string result = await UserDialogs.Instance.ActionSheetAsync("Pick Item to Edit", "Close", null, cancelSrc.Token, stepsInList);
 
-            //Debug.WriteLineIf(App.Debugging, result);
-
-            if (result != destroyString)
+            if (result != "Close")
             {
-                bool promptDelete = await UserDialogs.Instance.ConfirmAsync("Delete step?", "Confirm", destroyString, "Cancel", cancelSrc.Token);
+                bool promptDelete = await UserDialogs.Instance.ConfirmAsync("Delete step?", "Confirm", null, "Cancel", cancelSrc.Token);
 
-                int indexWithinList = stepsInList.IndexOf(result);
+                //int indexWithinList = stepsInList.IndexOf(result);
 
-                //Debug.WriteLineIf(App.Debugging, "indexWithinList: " + indexWithinList.ToString());
+                var itemsBeingDeleted = taskModels.Where(model => model.Title == result);
 
-                if (indexWithinList != -1)
+                if (!itemsBeingDeleted.Any())
                 {
-                    var item = taskModels.Where(m => m.ID == taskModels.ElementAt(indexWithinList).ID).First();
+                    Debug.WriteLine("Nothing found matching the title supplied");
+                }
+                else
+                {
+                    if (promptDelete)
+                    {
+                        int idValueOfElement = itemsBeingDeleted.First().ID;
+
+                        taskModels.Clear();
+                        customPageStackContent.Children.Clear();
+
+                        await App.Database.DeleteStepAsync(idValueOfElement);
+
+                        pollForDataAsync();
+                    }
+                }
+
+                //.WriteLineIf(App.Debugging, "indexWithinList: " + indexWithinList.ToString());
+                /*
+                if (indexWithinList != -1 && promptDelete)
+                {
+                    var item = taskModels.Where(m => m.ID == taskModels[indexWithinList].ID).First();
 
                     taskModels.Clear();
-
                     customPageStackContent.Children.Clear();
 
                     await App.Database.DeleteStepAsync(item.ID);
 
                     pollForDataAsync();
                 }
+                */
             }
         }
     }

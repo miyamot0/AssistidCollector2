@@ -17,6 +17,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -63,9 +64,14 @@
 
             </StackLayout>
         </ScrollView>
+        <Label x:Name="idNumber"
+               Grid.Row="1"
+               Grid.Column="0">
+            
+        </Label>
         <Button x:Name="helpButton"
             Text="Close Help"
-            Grid.Row="1"
+            Grid.Row="2"
             Clicked="Handle_ClickedAsync"></Button>
     </Grid>
 </ContentPage>
