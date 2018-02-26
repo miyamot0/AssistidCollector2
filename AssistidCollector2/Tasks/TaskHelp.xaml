@@ -44,22 +44,22 @@
                 <Label FontSize="Large" 
                    Margin="0, 0, 0, 10"
                    HorizontalTextAlignment="Center"
-                   Text="Using the Sleep Application"></Label>
+                   Text="Using the ESISM Application"></Label>
                     <Label FontSize="Large" 
                        Margin="25, 0, 0, 10"
-                       Text="• There are 5 sleep interventions to choose from. Please select the sleep intervention that we discussed to best suit your child's needs."></Label>
+                       Text="• There are 8 social activities that you can choose from."></Label>
                     <Label FontSize="Large" 
                        Margin="25, 0, 0, 10"
-                       Text="• Please refer to the strategies provided and select the strategies that you have actually used. It is okay to add or change options as you feel is appropriate for your child. But remember to tick the options you used."></Label>
+                       Text="• You can also create your own activity."></Label>
                     <Label FontSize="Large" 
                        Margin="25, 0, 0, 10"
-                       Text="• There are 3 relaxation options please select the one that is appropriate for your child and tick the option you have selected."></Label>
+                       Text="• In each activity, you will supply your own verbal and picture prompts for each step."></Label>
                     <Label FontSize="Large" 
                        Margin="25, 0, 0, 10"
-                       Text="• Please ensure that you scroll down to the bottom of each screen to gain access to all the information."></Label>
+                       Text="• Each step should have its own picture as well as a written message that can be read aloud."></Label>
                     <Label FontSize="Large" 
                        Margin="25, 0, 0, 10"
-                       Text="• It is important that each evening you tick the intervention screen and each option that you select from the general hygiene and relaxation screens."></Label>
+                       Text="• Once the app is set up, complete the social activity with another friend or support worker of your choosing."></Label>
 
             </StackLayout>
         </ScrollView>
